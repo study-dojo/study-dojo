@@ -4,10 +4,9 @@
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  "defaultStudySessions": [
+    { "topic": "Help with HW", "class": "ICS 3111", "status": "sensei", "date": "11/15/2020", "time": "Right Now!", "owner": "john@foo.com" },
+
+    { "topic":  "Exam Study", "class":  "ICS 311", "status":  "grasshopper", "date": "11/17/2020", "time": "5:00 pm", "owner":  "john@foo.com"}
   ]
 }
