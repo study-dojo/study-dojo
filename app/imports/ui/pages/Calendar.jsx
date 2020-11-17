@@ -1,13 +1,17 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Container, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
 import { Stuffs } from '../../api/stuff/Stuff';
-import StuffItem from '../components/StuffItem';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListStuff extends React.Component {
+class Calendar extends React.Component {
+me
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -19,13 +23,17 @@ class ListStuff extends React.Component {
     return (
         <Container>
           <Header as="h2" textAlign="center" inverted>Calendar</Header>
+          <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+          />
         </Container>
     );
   }
 }
 
 /** Require an array of Stuff documents in the props. */
-ListStuff.propTypes = {
+Calendar.propTypes = {
   stuffs: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -38,4 +46,4 @@ export default withTracker(() => {
     stuffs: Stuffs.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(ListStuff);
+})(Calendar);
