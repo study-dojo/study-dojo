@@ -10,10 +10,10 @@ import { StudySessions } from '../../api/studySession/StudySessions';
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
   topic: String,
-  course: String,
+  className: String,
   status: String,
-  date: String,
-  time: String,
+  sessionDate: String,
+  sessionTime: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -28,9 +28,9 @@ class AddStudySession extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { topic, course, status, date, time } = data;
+    const { topic, className, status, sessionDate, sessionTime } = data;
     const owner = Meteor.user().username;
-    StudySessions.collection.insert({ topic, course, status, date, time, owner },
+    StudySessions.collection.insert({ topic, className, status, sessionDate, sessionTime, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -54,10 +54,10 @@ class AddStudySession extends React.Component {
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment>
                 <TextField name='topic'/>
-                <TextField name='course'/>
+                <TextField name='className'/>
                 <SelectField name='status' options={statusOptions} />
-                <TextField name='date'/>
-                <TextField name='time'/>
+                <TextField name='sessionDate'/>
+                <TextField name='sessionTime'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
