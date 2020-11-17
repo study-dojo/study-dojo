@@ -12,7 +12,7 @@ class StudySessionsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       topic: String,
-      class: String,
+      course: String,
       status: String,
       date: String,
       time: String,
