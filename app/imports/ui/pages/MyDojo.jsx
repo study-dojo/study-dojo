@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
 import MyDojoStuff from '../components/MyDojoStuff';
+import { Dojos } from '../../api/dojo/Dojo';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class MyDojo extends React.Component {
@@ -45,9 +45,9 @@ MyDojo.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(Dojos.userPublicationName);
   return {
-    stuffs: Stuffs.collection.find({}).fetch(),
+    stuffs: Dojos.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(MyDojo);
