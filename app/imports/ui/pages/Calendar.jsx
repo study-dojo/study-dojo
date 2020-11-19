@@ -11,7 +11,6 @@ import { Stuffs } from '../../api/stuff/Stuff';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Calendar extends React.Component {
-me
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
