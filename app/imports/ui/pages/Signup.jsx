@@ -43,10 +43,10 @@ class Signup extends React.Component {
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
           <Grid.Column>
             <Header as="h2" textAlign="center">
-              Register your account
+              Create your account
             </Header>
             <Form onSubmit={this.submit}>
-              <Segment stacked>
+              <Segment raised color='orange'>
                 <Form.Input
                   label="Email"
                   id="signup-form-email"
@@ -67,21 +67,21 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button id="signup-form-submit" content="Submit"/>
+                <Form.Button inverted color="orange" id="signin-form-submit" content="Create Account"/>
+                <Message>
+                  Already have an account? Login <Link to="/signin">here</Link>
+                </Message>
+                {this.state.error === '' ? (
+                    ''
+                ) : (
+                    <Message
+                        error
+                        header="Registration was not successful"
+                        content={this.state.error}
+                    />
+                )}
               </Segment>
             </Form>
-            <Message>
-              Already have an account? Login <Link to="/signin">here</Link>
-            </Message>
-            {this.state.error === '' ? (
-              ''
-            ) : (
-              <Message
-                error
-                header="Registration was not successful"
-                content={this.state.error}
-              />
-            )}
           </Grid.Column>
         </Grid>
       </Container>
