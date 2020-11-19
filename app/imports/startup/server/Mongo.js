@@ -1,13 +1,13 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Dojos } from '../../api/dojo/Dojo';
+import { StudySessions } from '../../api/studySession/StudySessions';
 
 /* eslint-disable no-console */
 
 /** Initialize the database with a default data document. */
-function addData(data) {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.collection.insert(data);
+function addStudySession(data) {
+  console.log(`  Adding: ${data.topic} (${data.owner})`);
+  StudySessions.collection.insert(data);
 }
 
 /** Initialize the database with a default data dojo document. */
@@ -17,10 +17,10 @@ function addDojo(data) {
 }
 
 /** Initialize the collection if empty. */
-if (Stuffs.collection.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addData(data));
+if (StudySessions.collection.find().count() === 0) {
+  if (Meteor.settings.defaultStudySessions) {
+    console.log('Creating default Study Sessions.');
+    Meteor.settings.defaultStudySessions.map(data => addStudySession(data));
   }
 }
 
