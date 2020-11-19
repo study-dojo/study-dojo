@@ -3,8 +3,11 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.12.1",
+    "@fullcalendar/daygrid": "^5.4.0",
+    "@fullcalendar/react": "^5.4.0",
     "classnames": "^2.2.6",
     "core-js": "^3.6.4",
+    "fullcalendar": "^5.4.0",
     "graphql": "^14.5.8",
     "meteor-node-stubs": "^1.0.1",
     "prop-types": "^15.7.2",
