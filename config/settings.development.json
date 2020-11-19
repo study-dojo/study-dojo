@@ -4,11 +4,6 @@
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
-  "defaultDojo": [
-    { "className": "ICS 314", "status": "grasshopper", "owner": "john@foo.com" },
-    { "className": "ICS 311", "status": "grasshopper", "owner": "john@foo.com" }
-  ],
-
   "defaultStudySessions": [
     { "topic": "Help with HW", "className": "ICS 3111", "status": "sensei", "sessionDate": "11/15/2020", "sessionTime": "Right Now!", "owner": "john@foo.com" },
 
