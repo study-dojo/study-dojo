@@ -18,7 +18,7 @@ class MyDojo extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">My Dojo</Header>
+          <Header as="h2" textAlign="center" inverted>My Dojo</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
