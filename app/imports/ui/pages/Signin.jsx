@@ -49,7 +49,7 @@ export default class Signin extends React.Component {
               Login to your account
             </Header>
             <Form onSubmit={this.submit}>
-              <Segment stacked>
+              <Segment raised color='green'>
                 <Form.Input
                   label="Email"
                   id="signin-form-email"
@@ -70,21 +70,21 @@ export default class Signin extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button id="signin-form-submit" content="Submit"/>
+                <Form.Button inverted color="green" id="signin-form-submit" content="Login"/>
+                <Message>
+                  Dont have an account? Create a new one<Link to="/signup"> here.</Link>
+                </Message>
+                {this.state.error === '' ? (
+                    ''
+                ) : (
+                    <Message
+                        error
+                        header="Login was not successful"
+                        content={this.state.error}
+                    />
+                )}
               </Segment>
             </Form>
-            <Message>
-              <Link to="/signup">Click here to Register</Link>
-            </Message>
-            {this.state.error === '' ? (
-              ''
-            ) : (
-              <Message
-                error
-                header="Login was not successful"
-                content={this.state.error}
-              />
-            )}
           </Grid.Column>
         </Grid>
       </Container>
