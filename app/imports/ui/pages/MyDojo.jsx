@@ -19,7 +19,7 @@ class MyDojo extends React.Component {
     return (
         <Container>
           <Header as="h2" textAlign="center" inverted>My Dojo</Header>
-          <Table celled>
+          <Table celled striped>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Dojo</Table.HeaderCell>

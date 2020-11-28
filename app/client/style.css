@@ -4,3 +4,27 @@
   padding-top: 75px;
   height: 450px;
 }
+
+.ui.segment.AddForm{
+  background: #d4bb7e;
+  box-shadow: 5px 10px;
+}
+
+.ui.black.borderless.inverted.pointing.secondary.top.attached.NavBar.menu{
+  background: #000000;
+}
+
+.fc .fc-toolbar-title {
+  color: 	#FFFFFF;
+}
+
+.fc .fc-scrollgrid-liquid {
+  background: #d4bb7e;
+  box-shadow: 5px 10px;
+}
+
+.a {
+  color: 	#FFFFFF;
+}
+
+
