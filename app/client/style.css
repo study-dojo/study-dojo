@@ -1,33 +1,59 @@
 .landing-background {
   background: url('images/landing-background.jpg') no-repeat center top fixed;
   background-size: initial;
-  padding-top: 75px;
   height: 450px;
 }
 
-.ui.segment.AddForm{
+.ui.segment.AddForm {
   background: #d4bb7e;
   box-shadow: 5px 10px;
 }
 
-.ui.black.borderless.inverted.pointing.secondary.top.attached.NavBar.menu{
+.ui.black.borderless.inverted.pointing.secondary.top.attached.NavBar.menu {
   background: #000000;
 }
 
 .fc .fc-toolbar-title {
-  color: 	#FFFFFF;
+  color: #FFFFFF;
 }
 
-.fc .fc-scrollgrid-liquid {
+.fc-scrollgrid.fc-scrollgrid-liquid {
   background: #d4bb7e;
   box-shadow: 5px 10px;
 }
 
-.a {
-  color: 	#FFFFFF;
-}
-
-.ui.logo{
+.ui.logo {
   height: 30px;
 }
+
+.fc .fc-col-header-cell-cushion {
+  color: #000000;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #000000;
+}
+
+.ui.card.content {
+  box-shadow: 5px 10px;
+}
+
+body .ui.cards > .card {
+  box-shadow: 5px 10px;
+}
+
+.ui.celled.striped.table {
+  box-shadow: 5px 10px;
+}
+
+.ui.button.floating.top.right.pointing.dropdown {
+  background-color: #13ae37;
+  color: #FFFFFF;
+}
+
+.center.aligned.column{
+  margin-top: 50px;
+}
+
+
 
