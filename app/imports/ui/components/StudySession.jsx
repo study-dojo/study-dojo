@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Card, Icon } from 'semantic-ui-react';
-import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
+import { StudySessions } from '../../api/studySession/StudySessions';
 
 /** Renders cards with the info in pages/ListStudySessions.jsx. */
 class StudySession extends React.Component {
-  handleClick() {
+  handleClick(e, documentId) {
+    e.preventDefault();
     swal({
       title: 'Do you want to delete study session?',
       buttons: true,
@@ -14,9 +16,8 @@ class StudySession extends React.Component {
     })
         .then((willDelete) => {
           if (willDelete) {
+            StudySessions.collection.remove(documentId);
             swal('Study session deleted');
-          } else {
-            swal('Study session not deleted');
           }
         });
   }
@@ -31,8 +32,8 @@ class StudySession extends React.Component {
           </Card.Content>
 
           <Card.Content extra>
-            <Button floated='right' icon onClick={this.handleClick}>
-              <Icon name='trash' />
+            <Button icon floated='right' onClick={ e => this.handleClick(e, this.props.studySession._id)}>
+              <Icon name='trash'/>
             </Button>
           </Card.Content>
         </Card>

@@ -19,7 +19,8 @@ class ListStudySessions extends React.Component {
         <Container>
           <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
           <Card.Group>
-            {this.props.studySessions.map((studySession, index) => <StudySession key={index} studySession={studySession} />)}
+            {this.props.studySessions.map((studySession, index) => <StudySession key={index}
+                                                                                 studySession={studySession}/>)}
           </Card.Group>
         </Container>
     );
