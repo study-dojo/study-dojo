@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import { Stuffs } from '../../api/stuff/Stuff';
+import { StudySessions } from '../../api/studySession/StudySessions';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Calendar extends React.Component {
@@ -33,16 +33,16 @@ class Calendar extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 Calendar.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  studySessions: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(StudySessions.userPublicationName);
   return {
-    stuffs: Stuffs.collection.find({}).fetch(),
+    studySessions: StudySessions.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Calendar);
