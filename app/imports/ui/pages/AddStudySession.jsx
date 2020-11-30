@@ -3,9 +3,11 @@ import { Grid, Segment, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { Dojos } from '../../api/dojo/Dojo';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -39,6 +41,11 @@ class AddStudySession extends React.Component {
             formRef.reset();
           }
         });
+    // find data from dojo collection with the same className as inputted className
+    const sameClass = Dojos.collection.find(
+        { specification: { $elemMatch: { className: this.className } } },
+    );
+    console.log(_.pluck(sameClass.find({ owner }).fetch(), owner));
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -55,7 +62,7 @@ class AddStudySession extends React.Component {
               <Segment>
                 <TextField name='topic'/>
                 <TextField name='className'/>
-                <SelectField name='status' options={statusOptions} />
+                <SelectField name='status' options={statusOptions}/>
                 <TextField name='sessionDate'/>
                 <TextField name='sessionTime'/>
                 <SubmitField value='Submit'/>
