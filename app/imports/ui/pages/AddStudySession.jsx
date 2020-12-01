@@ -43,7 +43,6 @@ class AddStudySession extends React.Component {
             formRef.reset();
             // find all users that are registered under the same class
             const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className }).fetch(), 'owner'), owner);
-            console.log(sameOwners);
             sameOwners.map((entry) => StudySessions.collection.insert({
                   topic: data.topic,
                   className: data.className,
