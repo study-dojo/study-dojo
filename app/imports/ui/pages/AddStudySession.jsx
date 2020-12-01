@@ -68,7 +68,7 @@ class AddStudySession extends React.Component {
             <AutoForm ref={ref => {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
-              <Segment>
+              <Segment className='AddForm'>
                 <TextField id="topic-field" name='topic'/>
                 <TextField id="className-field" name='className'/>
                 <SelectField id="status-dropdown" name='status' options={statusOptions} />
