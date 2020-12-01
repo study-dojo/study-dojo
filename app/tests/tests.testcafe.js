@@ -27,8 +27,7 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.only('Test study-dojo', async (testController) => {
-  await landingPage.isDisplayed(testController);
+test('Test study-dojo', async (testController) => {
   await navBar.gotoSigninPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
@@ -43,6 +42,4 @@ test.only('Test study-dojo', async (testController) => {
   await sessionList.isDisplayed(testController);
   await navBar.gotoCalenderPage(testController);
   await calenderPage.isDisplayed(testController);
-  await navBar.logout(testController);
-  await signoutPage.isDisplayed(testController);
 });
