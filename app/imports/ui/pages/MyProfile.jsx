@@ -73,7 +73,7 @@ class MyProfile extends React.Component {
                 </Grid.Row>
                 <Grid.Row>
                   <AutoForm model={profile} schema={bridge} onSubmit={data => this.submit(data)}>
-                    <Segment>
+                    <Segment className='AddForm'>
                       <Form.Group widths={'equal'}>
                         <TextField id='firstName' name='firstName' showInlineError={true} placeholder={'First Name'}/>
                         <TextField id='lastName' name='lastName' showInlineError={true} placeholder={'Last Name'}/>

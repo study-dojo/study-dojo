@@ -17,7 +17,6 @@ class NavBar extends React.Component {
           </Menu.Item>
           {this.props.currentUser ? (
             [<Menu.Item id="navbar-my-dojo" as={NavLink} activeClassName="active" exact to="/mydojo" key='mydojo'>My Dojo</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/myprofile" key='myprofile'>My Profile</Menu.Item>,
             <Menu.Item id="navbar-add-session" as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Session</Menu.Item>,
             <Menu.Item id="navbar-session-list" as={NavLink} activeClassName="active" exact to="/list" key='list'>Session List</Menu.Item>,
             <Menu.Item id="navbar-calender" as={NavLink} activeClassName="active" exact to="/calendar" key='calendar'>Calendar</Menu.Item>]
@@ -30,7 +29,7 @@ class NavBar extends React.Component {
                 <Button color="green" as={NavLink} exact to="/signin" id="sign-in-button">Sign In</Button>
             ) : (
                 <>
-                  <Image as={NavLink} activeClassName="active" exact to="/calendar" key='calendar' src="/images/avatar.png" avatar />
+                  <Image as={NavLink} activeClassName="active" exact to="/myprofile" key='myprofile' src="/images/avatar.png" avatar />
                   <Dropdown floating button id="navbar-current-user" text={this.props.currentUser} pointing="top right" >
                     <Dropdown.Menu>
                       <Dropdown.Item icon="sign-out alternate" text="Sign Out" id="navbar-sign-out" as={NavLink} exact to="/signout"/>
