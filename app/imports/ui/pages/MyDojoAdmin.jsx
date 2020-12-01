@@ -1,14 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader, Button, Icon } from 'semantic-ui-react';
+import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import MyDojoStuff from '../components/MyDojoStuff';
-import { Dojos } from '../../api/dojo/Dojo';
+import { Stuffs } from '../../api/stuff/Stuff';
+import MyDojoStuffAdmin from '../components/MyDojoStuffAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class MyDojo extends React.Component {
+class MyDojoAdmin extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -18,36 +17,19 @@ class MyDojo extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container id="my-dojo-page">
-          <Header as="h2" textAlign="center" inverted>My Dojo</Header>
-          <Table celled striped>
+        <Container>
+          <Header as="h2" textAlign="center">List Stuff (Admin)</Header>
+          <Table celled>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Dojo</Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
+                <Table.HeaderCell>Owner</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <MyDojoStuff key={stuff._id} stuff={stuff}/>)}
+              {this.props.stuffs.map((stuff) => <MyDojoStuffAdmin key={stuff._id} stuff={stuff} />)}
             </Table.Body>
-
-            <Table.Footer fullWidth>
-              <Table.Row>
-                <Table.HeaderCell colSpan='2'>
-                  <Button
-                      floated='right'
-                      icon
-                      labelPosition='left'
-                      primary
-                      size='small'
-                      as={Link} to='/adddojo'
-                  >
-                    <Icon name='plus square' /> Add Dojo
-                  </Button>
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Footer>
-
           </Table>
         </Container>
     );
@@ -55,7 +37,7 @@ class MyDojo extends React.Component {
 }
 
 /** Require an array of Stuff documents in the props. */
-MyDojo.propTypes = {
+MyDojoAdmin.propTypes = {
   stuffs: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -63,9 +45,9 @@ MyDojo.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Dojos.userPublicationName);
+  const subscription = Meteor.subscribe(Stuffs.adminPublicationName);
   return {
-    stuffs: Dojos.collection.find({}).fetch(),
+    stuffs: Stuffs.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(MyDojo);
+})(MyDojoAdmin);

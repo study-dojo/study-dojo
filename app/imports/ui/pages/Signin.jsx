@@ -45,7 +45,7 @@ export default class Signin extends React.Component {
       <Container id="signin-page">
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
           <Grid.Column>
-            <Header as="h2" textAlign="center">
+            <Header as="h2" textAlign="center" inverted>
               Login to your account
             </Header>
             <Form onSubmit={this.submit}>
@@ -72,7 +72,7 @@ export default class Signin extends React.Component {
                 />
                 <Form.Button inverted color="green" id="signin-form-submit" content="Login"/>
                 <Message>
-                  Dont have an account? Create a new one<Link to="/signup"> here.</Link>
+                  Dont have an account? Create a new one<Link to="/signup"> here</Link>
                 </Message>
                 {this.state.error === '' ? (
                     ''
