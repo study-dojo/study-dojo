@@ -3,7 +3,6 @@ import { Grid, Segment, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { _ } from 'meteor/underscore';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
@@ -54,7 +53,7 @@ class AddStudySession extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center" inverted>Add Study Session</Header>
+            <Header as="h2" textAlign="center">Add Study Session</Header>
             <AutoForm ref={ref => {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
