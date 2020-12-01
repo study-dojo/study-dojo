@@ -10,6 +10,7 @@ import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */
 class ListStudySessions extends React.Component {
+  // Handles when user clicks "Notification" button
   handleClick(e) {
     e.preventDefault();
     /* Checks if there are any alerts for the user, create alert message if there is */
@@ -18,6 +19,8 @@ class ListStudySessions extends React.Component {
     }
   }
 
+  /* Creates message asking if user wants to attend study session
+   * Clicking ok, adds study session for user */
   createAlertMessage(data, documentId) {
     const { owner, topic, className, sessionDate, sessionTime } = data;
     swal({
@@ -34,7 +37,6 @@ class ListStudySessions extends React.Component {
               sessionTime: sessionTime,
               owner: owner,
             });
-            console.log(documentId);
             Alerts.collection.remove(documentId);
           }
         });
@@ -52,7 +54,7 @@ class ListStudySessions extends React.Component {
           <Container>
             <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
             <Card.Content floated='right'>
-              <Button onClick={e => this.handleClick(e, this.props.alert._id)}>
+              <Button onClick={e => this.handleClick(e)}>
                 Notification
               </Button>
             </Card.Content>
