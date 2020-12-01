@@ -95,6 +95,7 @@ class MyProfile extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 MyProfile.propTypes = {
+  profile: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
