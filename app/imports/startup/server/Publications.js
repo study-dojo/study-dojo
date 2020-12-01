@@ -22,7 +22,7 @@ Meteor.publish(StudySessions.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Alerts.userPublicationName, function() {
+Meteor.publish(Alerts.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Alerts.collection.find({ owner: username });

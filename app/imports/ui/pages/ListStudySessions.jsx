@@ -1,15 +1,23 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card } from 'semantic-ui-react';
+import { Container, Header, Loader, Card, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import swal from 'sweetalert';
+import swal from '@sweetalert/with-react';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */
 class ListStudySessions extends React.Component {
+  handleClick(e) {
+    e.preventDefault();
+    /* Checks if there are any alerts for the user, create alert message if there is */
+    if (Alerts.collection.find({}).fetch().length !== 0) {
+      Alerts.collection.find({}).fetch().map(data => this.createAlertMessage(data, data._id));
+    }
+  }
+
   createAlertMessage(data, documentId) {
     const { owner, topic, className, sessionDate, sessionTime } = data;
     swal({
@@ -41,14 +49,14 @@ class ListStudySessions extends React.Component {
   renderPage() {
     return (
         <div>
-          <script>
-            {/* Checks if there are any alerts for the user, create alert message if there is */}
-            if (Alerts.collection.find({}).fetch().length !== 0) {
-              Alerts.collection.find({}).fetch().map(data => this.createAlertMessage(data, this.props.alerts._id))
-            }
-          </script>
           <Container>
             <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
+            <Card.Content floated='right'>
+              <Button onClick={e => this.handleClick(e, this.props.alert._id)}>
+                Notification
+              </Button>
+            </Card.Content>
+
             <Card.Group>
               {this.props.studySessions.map((studySession, index) => <StudySession key={index}
                                                                                    studySession={studySession}/>)}
@@ -62,7 +70,7 @@ class ListStudySessions extends React.Component {
 /** Require an array of Stuff documents in the props. */
 ListStudySessions.propTypes = {
   studySessions: PropTypes.array.isRequired,
-  alerts: PropTypes.array.isRequired,
+  alert: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -73,7 +81,7 @@ export default withTracker(() => {
   const sub2 = Meteor.subscribe(Alerts.userPublicationName);
   return {
     studySessions: StudySessions.collection.find({}).fetch(),
-    alerts: Alerts.collection.find({}).fetch(),
+    alert: Alerts.collection.find({}).fetch(),
     ready: sub1.ready() && sub2.ready(),
   };
 })(ListStudySessions);
