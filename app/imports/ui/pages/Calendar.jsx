@@ -20,7 +20,7 @@ class Calendar extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container>
+        <Container id="my-calender-page">
           <Header as="h2" textAlign="center" inverted>Calendar</Header>
           <FullCalendar
               plugins={[dayGridPlugin]}

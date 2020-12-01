@@ -16,7 +16,7 @@ class ListStudySessions extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container>
+        <Container id="session-list">
           <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
           <Card.Group>
             {this.props.studySessions.map((studySession, index) => <StudySession key={index} studySession={studySession} />)}

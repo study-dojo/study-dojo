@@ -19,8 +19,8 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 const statusOptions = [
-  { label: 'Grasshopper', value: 'grasshopper' },
-  { label: 'Sensei', value: 'sensei' },
+  { label: 'Grasshopper', value: 'grasshopper', id: 'grasshopper' },
+  { label: 'Sensei', value: 'sensei', id: 'sensei' },
 ];
 
 /** Renders the Page for adding a document. */
@@ -46,19 +46,19 @@ class AddStudySession extends React.Component {
     let fRef = null;
 
     return (
-        <Grid container centered>
+        <Grid container centered id="add-study-session">
           <Grid.Column>
             <Header as="h2" textAlign="center" inverted>Add Study Session</Header>
             <AutoForm ref={ref => {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment>
-                <TextField name='topic'/>
-                <TextField name='className'/>
-                <SelectField name='status' options={statusOptions} />
-                <TextField name='sessionDate'/>
-                <TextField name='sessionTime'/>
-                <SubmitField value='Submit'/>
+                <TextField id="topic-field" name='topic'/>
+                <TextField id="className-field" name='className'/>
+                <SelectField id="status-dropdown" name='status' options={statusOptions} />
+                <TextField id="sessionDate-field" name='sessionDate'/>
+                <TextField id="sessionTime-field" name='sessionTime'/>
+                <SubmitField id="add-submit" value='Submit'/>
                 <ErrorsField/>
               </Segment>
             </AutoForm>
