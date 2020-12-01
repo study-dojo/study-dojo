@@ -29,12 +29,14 @@ class NavBar extends React.Component {
             {this.props.currentUser === '' ? (
                 <Button color="green" as={NavLink} exact to="/signin" id="sign-in-button">Sign In</Button>
             ) : (
-                <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={'user'}>
-                  <Dropdown.Menu>
-                    <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact
-                                   to="/signout"/>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <>
+                  <Image as={NavLink} activeClassName="active" exact to="/calendar" key='calendar' src="/images/avatar.png" avatar />
+                  <Dropdown floating button id="navbar-current-user" text={this.props.currentUser} pointing="top right" >
+                    <Dropdown.Menu>
+                      <Dropdown.Item icon="sign-out alternate" text="Sign Out" id="navbar-sign-out" as={NavLink} exact to="/signout"/>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </>
             )}
           </Menu.Item>
         </Menu>
