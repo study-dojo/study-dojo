@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { _ } from 'meteor/underscore';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -25,6 +26,23 @@ class Calendar extends React.Component {
           <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
+              events= {[
+                { title: 'Exam Study 4pm', date: '2020-12-07' },
+                { title: 'Programming Practice 5pm', date: '2020-12-08' },
+                { title: 'Coding Camp 3pm', date: '2020-12-09' },
+                { title: 'Exam Study 2pm', date: '2020-12-10' },
+                { title: 'HW Help 2pm', date: '2020-12-11' },
+                { title: 'HW Help 1pm', date: '2020-12-14' },
+                { title: 'Tutoring 2pm', date: '2020-12-15' },
+                { title: 'Exam Study 8pm', date: '2020-12-16' },
+                { title: 'Exam Study 6pm', date: '2020-12-17' },
+                { title: 'Group Project 2pm', date: '2020-12-18' },
+                { title: 'HW Help 1pm', date: '2020-12-21' },
+                { title: 'Tutoring 2pm', date: '2020-12-22' },
+                { title: 'Exam Study 8pm', date: '2020-12-23' },
+                { title: 'Exam Study 6pm', date: '2020-12-24' },
+                { title: 'Group Project 2pm', date: '2020-12-25' },
+              ]}
           />
         </Container>
     );
