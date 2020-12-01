@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Card, Button } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import swal from '@sweetalert/with-react';
+import swal from '@sweetalert';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { Alerts } from '../../api/alert/Alerts';

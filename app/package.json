@@ -5,6 +5,7 @@
     "@babel/runtime": "^7.12.1",
     "@fullcalendar/daygrid": "^5.4.0",
     "@fullcalendar/react": "^5.4.0",
+    "@sweetalert/with-react": "^0.1.1",
     "classnames": "^2.2.6",
     "core-js": "^3.6.4",
     "fullcalendar": "^5.4.0",
