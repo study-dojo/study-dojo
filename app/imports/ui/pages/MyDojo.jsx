@@ -24,7 +24,6 @@ class MyDojo extends React.Component {
               <Table.Row>
                 <Table.HeaderCell>Dojo</Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
-                <Table.HeaderCell>Owner</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>

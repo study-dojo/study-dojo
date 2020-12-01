@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Dojos } from '../../api/dojo/Dojo';
+import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { StudySessions } from '../../api/studySession/StudySessions';
-
+import { Alerts } from '../../api/alert/Alerts';
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
 Meteor.publish(Dojos.userPublicationName, function () {
@@ -17,6 +18,22 @@ Meteor.publish(StudySessions.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return StudySessions.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Alerts.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Alerts.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+// Publish to all users to find other users that attend the same class
+Meteor.publish(DojoOwners.userPublicationName, function () {
+  if (this.userId) {
+    return DojoOwners.collection.find();
   }
   return this.ready();
 });

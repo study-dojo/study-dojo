@@ -3,9 +3,14 @@ import { Grid, Segment, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
+import { withTracker } from 'meteor/react-meteor-data';
+import { PropTypes } from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { DojoOwners } from '../../api/dojo/DojoOwner';
+import { Alerts } from '../../api/alert/Alerts';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -37,6 +42,17 @@ class AddStudySession extends React.Component {
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
+            // find all other users that are registered under the same class
+            const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className }).fetch(), 'owner'), owner);
+
+            // Insert an alert for all other users
+            sameOwners.map((entry) => Alerts.collection.insert({
+              owner: entry,
+              topic: topic,
+              className: className,
+              sessionDate: sessionDate,
+              sessionTime: sessionTime,
+            }));
           }
         });
   }
@@ -48,7 +64,7 @@ class AddStudySession extends React.Component {
     return (
         <Grid container centered id="add-study-session">
           <Grid.Column>
-            <Header as="h2" textAlign="center" inverted>Add Study Session</Header>
+            <Header as="h2" textAlign="center">Add Study Session</Header>
             <AutoForm ref={ref => {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
@@ -68,4 +84,13 @@ class AddStudySession extends React.Component {
   }
 }
 
-export default AddStudySession;
+AddStudySession.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const sub = Meteor.subscribe(DojoOwners.userPublicationName);
+  return {
+    ready: sub.ready(),
+  };
+})(AddStudySession);

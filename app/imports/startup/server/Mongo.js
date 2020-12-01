@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { DojoOwners } from '../../api/dojo/DojoOwner';
 
 /* eslint-disable no-console */
 
@@ -14,6 +15,7 @@ function addStudySession(data) {
 function addDojo(data) {
   console.log(`  Adding: ${data.className} (${data.owner})`);
   Dojos.collection.insert(data);
+  DojoOwners.collection.insert({ owner: data.owner, className: data.className });
 }
 
 /** Initialize the collection if empty. */

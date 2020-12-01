@@ -10,7 +10,6 @@ class MyDojoStuff extends React.Component {
         <Table.Row>
           <Table.Cell>{this.props.stuff.className}</Table.Cell>
           <Table.Cell>{this.props.stuff.status}</Table.Cell>
-          <Table.Cell>{this.props.stuff.owner}</Table.Cell>
         </Table.Row>
     );
   }
