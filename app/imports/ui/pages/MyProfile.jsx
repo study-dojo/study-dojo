@@ -16,7 +16,7 @@ const formSchema = new SimpleSchema({
   firstName: { type: String, label: 'First', optional: true },
   lastName: { type: String, label: 'Last', optional: true },
   bio: { type: String, label: 'Bio', optional: true },
-  picture: { type: String, label: 'Profile Picture URL', optional: true },
+  picture: { type: String, label: 'Profile Picture', optional: true },
 });
 
 /** Renders the Profile page */
@@ -49,16 +49,24 @@ class MyProfile extends React.Component {
           <Grid divided='vertically'>
             <Grid.Row>
               <Grid.Column width={4}>
-
+                <Card>
+                  <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false}/>
+                  <Card.Content>
+                    <Card.Header>My Name</Card.Header>
+                    <Card.Meta>
+                      <span>{email}</span>
+                    </Card.Meta>
+                    <Card.Description>
+                      My Bio...
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
               </Grid.Column>
               <Grid.Column width={12}>
                 <Grid.Row>
                   <Card fluid>
                     <Card.Content>
                       <Card.Header>Rank Progress</Card.Header>
-                      <Card.Description>
-                        Matthew is a musician living in Nashville.
-                      </Card.Description>
                     </Card.Content>
                     <Progress value='3' total='5' progress='ratio' size='large'/>
                   </Card>
@@ -71,7 +79,7 @@ class MyProfile extends React.Component {
                         <TextField id='lastName' name='lastName' showInlineError={true} placeholder={'Last Name'}/>
                         <Form.Input fluid label='Email' placeholder={email} readOnly/>
                       </Form.Group>
-                      <TextField name='picture' showInlineError={true} placeholder={'URL to picture'}/>
+                      <TextField name='picture' showInlineError={true} placeholder={'Image URL'}/>
                       <LongTextField id='bio' name='bio' placeholder='Write a little bit about yourself.'/>
                       <SubmitField id='profile-update' value='Update Profile'/>
                     </Segment>
