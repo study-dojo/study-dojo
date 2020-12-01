@@ -4,6 +4,10 @@ import { Dojos } from '../../api/dojo/Dojo';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { Alerts } from '../../api/alert/Alerts';
+import { Profiles } from '../../api/profiles/Profiles';
+
+Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
+
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
 Meteor.publish(Dojos.userPublicationName, function () {
