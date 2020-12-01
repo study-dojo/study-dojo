@@ -55,5 +55,9 @@ body .ui.cards > .card {
   margin-top: 50px;
 }
 
+div.ui.card{
+  box-shadow: 5px 10px;
+}
+
 
 
