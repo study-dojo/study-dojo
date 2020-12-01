@@ -3,11 +3,35 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Card } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */
 class ListStudySessions extends React.Component {
+  createAlertMessage(data, documentId) {
+    const { owner, topic, className, sessionDate, sessionTime } = data;
+    swal({
+      title: `Do you want to attend a study session about ${topic} for ${className} on ${sessionDate} at ${sessionTime}`,
+      buttons: true,
+    })
+        .then((willDelete) => {
+          if (willDelete) {
+            StudySessions.collection.insert({
+              topic: topic,
+              className: className,
+              status: 'grasshopper',
+              sessionDate: sessionDate,
+              sessionTime: sessionTime,
+              owner: owner,
+            });
+            console.log(documentId);
+            Alerts.collection.remove(documentId);
+          }
+        });
+  }
+
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -16,12 +40,21 @@ class ListStudySessions extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container>
-          <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
-          <Card.Group>
-            {this.props.studySessions.map((studySession, index) => <StudySession key={index} studySession={studySession} />)}
-          </Card.Group>
-        </Container>
+        <div>
+          <script>
+            {/* Checks if there are any alerts for the user, create alert message if there is */}
+            if (Alerts.collection.find({}).fetch().length !== 0) {
+              Alerts.collection.find({}).fetch().map(data => this.createAlertMessage(data, this.props.alerts._id))
+            }
+          </script>
+          <Container>
+            <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
+            <Card.Group>
+              {this.props.studySessions.map((studySession, index) => <StudySession key={index}
+                                                                                   studySession={studySession}/>)}
+            </Card.Group>
+          </Container>
+        </div>
     );
   }
 }
@@ -29,15 +62,18 @@ class ListStudySessions extends React.Component {
 /** Require an array of Stuff documents in the props. */
 ListStudySessions.propTypes = {
   studySessions: PropTypes.array.isRequired,
+  alerts: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(StudySessions.userPublicationName);
+  const sub1 = Meteor.subscribe(StudySessions.userPublicationName);
+  const sub2 = Meteor.subscribe(Alerts.userPublicationName);
   return {
     studySessions: StudySessions.collection.find({}).fetch(),
-    ready: subscription.ready(),
+    alerts: Alerts.collection.find({}).fetch(),
+    ready: sub1.ready() && sub2.ready(),
   };
 })(ListStudySessions);

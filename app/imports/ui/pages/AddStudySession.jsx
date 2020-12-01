@@ -10,6 +10,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
+import { Alerts } from '../../api/alert/Alerts';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -41,16 +42,17 @@ class AddStudySession extends React.Component {
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
-            // find all users that are registered under the same class
+            // find all other users that are registered under the same class
             const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className }).fetch(), 'owner'), owner);
-            sameOwners.map((entry) => StudySessions.collection.insert({
-                  topic: data.topic,
-                  className: data.className,
-                  status: data.status,
-                  sessionDate: data.sessionDate,
-                  sessionTime: data.sessionTime,
-                  owner: entry,
-                }));
+
+            // Insert an alert for all other users
+            sameOwners.map((entry) => Alerts.collection.insert({
+              owner: entry,
+              topic: topic,
+              className: className,
+              sessionDate: sessionDate,
+              sessionTime: sessionTime,
+            }));
           }
         });
   }
