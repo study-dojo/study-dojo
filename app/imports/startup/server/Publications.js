@@ -22,10 +22,10 @@ Meteor.publish(StudySessions.userPublicationName, function () {
   return this.ready();
 });
 
+// Publish to all users to find other users that attend the same class
 Meteor.publish(DojoOwners.userPublicationName, function () {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return DojoOwners.collection.find({ owner: username });
+    return DojoOwners.collection.find();
   }
   return this.ready();
 });

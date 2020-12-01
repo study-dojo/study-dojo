@@ -3,10 +3,13 @@ import { Grid, Segment, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
+import { withTracker } from 'meteor/react-meteor-data';
+import { PropTypes } from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
-import { Dojos } from '../../api/dojo/Dojo';
+import { DojoOwners } from '../../api/dojo/DojoOwner';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -38,6 +41,17 @@ class AddStudySession extends React.Component {
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
+            // find all users that are registered under the same class
+            const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className }).fetch(), 'owner'), owner);
+            console.log(sameOwners);
+            sameOwners.map((entry) => StudySessions.collection.insert({
+                  topic: data.topic,
+                  className: data.className,
+                  status: data.status,
+                  sessionDate: data.sessionDate,
+                  sessionTime: data.sessionTime,
+                  owner: entry,
+                }));
           }
         });
   }
@@ -69,4 +83,13 @@ class AddStudySession extends React.Component {
   }
 }
 
-export default AddStudySession;
+AddStudySession.propTypes = {
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const sub = Meteor.subscribe(DojoOwners.userPublicationName);
+  return {
+    ready: sub.ready(),
+  };
+})(AddStudySession);
