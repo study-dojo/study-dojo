@@ -17,7 +17,7 @@ class MyDojo extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container>
+        <Container id="my-dojo-page">
           <Header as="h2" textAlign="center" inverted>My Dojo</Header>
           <Table celled>
             <Table.Header>
