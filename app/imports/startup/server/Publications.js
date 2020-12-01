@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { Profiles } from '../../api/profiles/Profiles';
+
+Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
