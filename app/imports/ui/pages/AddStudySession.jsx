@@ -42,10 +42,9 @@ class AddStudySession extends React.Component {
           }
         });
     // find data from dojo collection with the same className as inputted className
-    const sameClass = Dojos.collection.find(
-        { specification: { $elemMatch: { className: this.className } } },
-    );
-    console.log(_.pluck(sameClass.find({ owner }).fetch(), owner));
+    const sameClass = Dojos.collection.find({ className: this.className }).fetch();
+    console.log('test');
+    console.log(sameClass);
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
