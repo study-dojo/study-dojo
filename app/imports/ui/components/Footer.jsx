@@ -11,7 +11,7 @@ class Footer extends React.Component {
               ICS 314 Fall 2020: Software Engeering I <br />
               University of Hawaii<br />
               Honolulu, HI 96822 <br />
-            <a href="https://study-dojo.github.io/">Our Team's Project Page</a>
+            <a href="https://study-dojo.github.io/">Our Team&apos;s Project Page</a>
           </div>
         </footer>
     );
