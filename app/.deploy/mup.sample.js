@@ -1,9 +1,9 @@
 module.exports = {
   servers: {
     one: {
-      host: 'study-dojo.me',
+      host: '111.222.333.444',
       username: 'root',
-      password: 'StudyDojo'
+      password: 'changeme'
     }
   },
 
@@ -20,7 +20,7 @@ module.exports = {
     },
 
     env: {
-      ROOT_URL: 'https://study-dojo.me',
+      ROOT_URL: 'http://111.222.333.444',
       MONGO_URL: 'mongodb://mongodb/meteor',
       MONGO_OPLOG_URL: 'mongodb://mongodb/local',
     },
@@ -32,14 +32,6 @@ module.exports = {
     enableUploadProgressBar: true
   },
 
-  proxy: {
-    domains: 'study-dojo.me',
-    ssl: {
-      letsEncryptEmail: 'johnson@hawaii.edu',
-      forceSSL: true
-    }
-  },
-
   mongo: {
     version: '3.4.1',
     servers: {
@@ -47,4 +39,5 @@ module.exports = {
     }
   },
 };
+
 
