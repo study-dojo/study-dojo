@@ -27,8 +27,8 @@ class StudySession extends React.Component {
         <Card centered>
           <Card.Content>
             <Card.Header>{this.props.studySession.topic}</Card.Header>
+            <Card.Header>{this.props.studySession.className}</Card.Header>
             <Card.Header>{this.props.studySession.sessionDate} - {this.props.studySession.sessionTime}</Card.Header>
-            <Card.Header>{this.props.studySession.className} - {this.props.studySession.status}</Card.Header>
           </Card.Content>
 
           <Card.Content extra>

@@ -13,7 +13,6 @@ class StudySessionsCollection {
     this.schema = new SimpleSchema({
       topic: String,
       className: String,
-      status: String,
       sessionDate: String,
       sessionTime: String,
       owner: String,

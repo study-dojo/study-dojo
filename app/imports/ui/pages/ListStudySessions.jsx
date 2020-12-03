@@ -32,7 +32,6 @@ class ListStudySessions extends React.Component {
             StudySessions.collection.insert({
               topic: topic,
               className: className,
-              status: 'grasshopper',
               sessionDate: sessionDate,
               sessionTime: sessionTime,
               owner: owner,

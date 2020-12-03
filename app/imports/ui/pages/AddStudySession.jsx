@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
@@ -16,26 +16,20 @@ import { Alerts } from '../../api/alert/Alerts';
 const formSchema = new SimpleSchema({
   topic: String,
   className: String,
-  status: String,
   sessionDate: String,
   sessionTime: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-const statusOptions = [
-  { label: 'Grasshopper', value: 'grasshopper', id: 'grasshopper' },
-  { label: 'Sensei', value: 'sensei', id: 'sensei' },
-];
-
 /** Renders the Page for adding a document. */
 class AddStudySession extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { topic, className, status, sessionDate, sessionTime } = data;
+    const { topic, className, sessionDate, sessionTime } = data;
     const owner = Meteor.user().username;
-    StudySessions.collection.insert({ topic, className, status, sessionDate, sessionTime, owner },
+    StudySessions.collection.insert({ topic, className, sessionDate, sessionTime, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -71,7 +65,6 @@ class AddStudySession extends React.Component {
               <Segment className='AddForm'>
                 <TextField id="topic-field" name='topic'/>
                 <TextField id="className-field" name='className'/>
-                <SelectField id="status-dropdown" name='status' options={statusOptions} />
                 <TextField id="sessionDate-field" name='sessionDate'/>
                 <TextField id="sessionTime-field" name='sessionTime'/>
                 <SubmitField id="add-submit" value='Submit'/>
