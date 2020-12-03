@@ -2,13 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
+import { Profiles } from '../../api/profiles/Profiles';
 
 /* eslint-disable no-console */
 
-/** Initialize the database with a default data document. */
+/** Initialize the database with a default study session document. */
 function addStudySession(data) {
   console.log(`  Adding: ${data.topic} (${data.owner})`);
-  StudySessions.collection.insert(data);
+  const documentId = StudySessions.collection.insert(data);
+  console.log(documentId);
 }
 
 /** Initialize the database with a default data dojo document. */

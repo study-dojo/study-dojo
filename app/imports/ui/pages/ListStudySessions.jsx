@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { Profiles } from '../../api/profiles/Profiles';
 import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */

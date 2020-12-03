@@ -17,6 +17,7 @@ const formSchema = new SimpleSchema({
   lastName: { type: String, label: 'Last', optional: true },
   bio: { type: String, label: 'Bio', optional: true },
   picture: { type: String, label: 'Profile Picture', optional: true },
+  registered: [String],
 });
 
 /** Renders the Profile page */
