@@ -15,5 +15,6 @@
     { "topic": "Help with HW", "className": "ICS 311", "status": "sensei", "sessionDate": "11/15/2020", "sessionTime": "Right Now!", "owner": "john@foo.com" },
 
     { "topic":  "Exam Study", "className":  "ICS 311", "status":  "grasshopper", "sessionDate": "11/17/2020", "sessionTime": "5:00 pm", "owner":  "john@foo.com"}
-  ]
+  ],
+  "loadAssetsFile": true
 }
