@@ -34,7 +34,6 @@ class NavBar extends React.Component {
                       header='Need help?'
                       trigger={<Icon className='question circle' />}
                   />
-                  )
                   <Image as={NavLink} activeClassName="active" exact to="/myprofile" key='myprofile' src="/images/avatar.png" avatar />
                   <Dropdown floating button id="navbar-current-user" text={this.props.currentUser} pointing="top right" >
                     <Dropdown.Menu>
