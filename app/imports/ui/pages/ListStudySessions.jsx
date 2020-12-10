@@ -54,7 +54,7 @@ class ListStudySessions extends React.Component {
           <Container id="session-list">
             <Header as="h2" textAlign="center" inverted>List Study Sessions</Header>
             <Card.Content floated='right'>
-              <Button onClick={e => this.handleClick(e)}>
+              <Button color='red' floated='left' onClick={e => this.handleClick(e)}>
                 Notification
               </Button>
             </Card.Content>
