@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress, Card, Container, Header, Loader, Image, Grid, Segment, Form } from 'semantic-ui-react';
+import { Progress, Card, Container, Header, Loader, Image, Grid, Segment, Form, Divider } from 'semantic-ui-react';
 import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -67,9 +67,11 @@ class MyProfile extends React.Component {
                   <Card fluid>
                     <Card.Content>
                       <Card.Header>Rank Progress</Card.Header>
+                      <Divider hidden/>
+                      <Progress value='3' total='5' progress='ratio'/>
                     </Card.Content>
-                    <Progress value='3' total='5' progress='ratio' size='large'/>
                   </Card>
+                <Divider hidden/>
                 </Grid.Row>
                 <Grid.Row>
                   <AutoForm model={profile} schema={bridge} onSubmit={data => this.submit(data)}>
