@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Dojos } from '../../api/dojo/Dojo';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { SessionOwners } from '../../api/studySession/SessionOwner';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
 
@@ -19,6 +20,14 @@ Meteor.publish(Dojos.userPublicationName, function () {
 });
 
 Meteor.publish(StudySessions.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return StudySessions.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(SessionOwners.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return StudySessions.collection.find({ owner: username });

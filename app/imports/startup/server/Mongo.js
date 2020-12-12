@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { SessionOwners } from '../../api/studySession/SessionOwner';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 
 /* eslint-disable no-console */
@@ -9,7 +10,6 @@ import { DojoOwners } from '../../api/dojo/DojoOwner';
 function addStudySession(data) {
   console.log(`  Adding: ${data.topic} (${data.owner})`);
   const documentId = StudySessions.collection.insert(data);
-  console.log(documentId);
 }
 
 /** Initialize the database with a default data dojo document. */
