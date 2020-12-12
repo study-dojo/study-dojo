@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
-import { Profiles } from '../../api/profiles/Profiles';
 
 /* eslint-disable no-console */
 
