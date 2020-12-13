@@ -25,20 +25,14 @@ class ListStudySessions extends React.Component {
   /* Creates message asking if user wants to attend study session
    * Clicking ok, adds study session for user */
   createAlertMessage(data, documentId) {
-    const { owner, topic, className, sessionDate, sessionTime } = data;
+    const { owner, topic, className, sessionDate, sessionTime, sessionId } = data;
     swal({
       title: `Do you want to attend a study session about ${topic} for ${className} on ${sessionDate} at ${sessionTime}`,
       buttons: true,
     })
         .then((willDelete) => {
           if (willDelete) {
-            StudySessions.collection.insert({
-              topic: topic,
-              className: className,
-              sessionDate: sessionDate,
-              sessionTime: sessionTime,
-              owner: owner,
-            });
+            RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             Alerts.collection.remove(documentId);
           }
         });
@@ -51,8 +45,10 @@ class ListStudySessions extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    // pulls _id from all registered study sessions
-    const sessionId = _.pluck(this.props.registeredSessions, 'session');
+    // pulls _id from all registered study sessions belonging to the user
+    const owner = Meteor.user().username;
+    const filteredSessions = _.filter(RegisteredSessions.collection.find({}).fetch(), function (data) { return data.owner === owner; });
+    const sessionId = _.pluck(filteredSessions, 'session');
 
     // finds all study sessions that matches sessionId
     const regStudySessions = sessionId.map(e => StudySessions.collection.find({ _id: e }).fetch());

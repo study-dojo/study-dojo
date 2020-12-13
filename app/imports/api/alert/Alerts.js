@@ -16,6 +16,7 @@ class AlertCollection {
       className: String,
       sessionDate: String,
       sessionTime: String,
+      sessionId: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

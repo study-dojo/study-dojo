@@ -19,14 +19,6 @@ Meteor.publish(Dojos.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(RegisteredSessions.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return RegisteredSessions.collection.find({ owner: username });
-  }
-  return this.ready();
-});
-
 Meteor.publish(Alerts.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
@@ -46,6 +38,13 @@ Meteor.publish(DojoOwners.userPublicationName, function () {
 Meteor.publish(StudySessions.userPublicationName, function () {
   if (this.userId) {
     return StudySessions.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(RegisteredSessions.userPublicationName, function () {
+  if (this.userId) {
+    return RegisteredSessions.collection.find();
   }
   return this.ready();
 });

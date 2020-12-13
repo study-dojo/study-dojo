@@ -9,6 +9,7 @@ import { PropTypes } from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { Alerts } from '../../api/alert/Alerts';
 
@@ -29,13 +30,15 @@ class AddStudySession extends React.Component {
   submit(data, formRef) {
     const { topic, className, sessionDate, sessionTime } = data;
     const owner = Meteor.user().username;
-    StudySessions.collection.insert({ topic, className, sessionDate, sessionTime, owner },
+    const sessionId = StudySessions.collection.insert({ topic, className, sessionDate, sessionTime, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
+            // Register study session for owner
+            RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             // find all other users that are registered under the same class
             const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className }).fetch(), 'owner'), owner);
 
@@ -46,6 +49,7 @@ class AddStudySession extends React.Component {
               className: className,
               sessionDate: sessionDate,
               sessionTime: sessionTime,
+              sessionId: sessionId,
             }));
           }
         });
