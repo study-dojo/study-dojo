@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Icon } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -23,12 +24,16 @@ class StudySession extends React.Component {
   }
 
   render() {
+    const topic = _.pluck(this.props.studySession, 'topic');
+    const className = _.pluck(this.props.studySession, 'className');
+    const sessionDate = _.pluck(this.props.studySession, 'sessionDate');
+    const sessionTime = _.pluck(this.props.studySession, 'sessionTime');
     return (
         <Card centered>
           <Card.Content>
-            <Card.Header>{this.props.studySession.topic}</Card.Header>
-            <Card.Header>{this.props.studySession.className}</Card.Header>
-            <Card.Header>{this.props.studySession.sessionDate} - {this.props.studySession.sessionTime}</Card.Header>
+            <Card.Header>{topic}</Card.Header>
+            <Card.Header>{className}</Card.Header>
+            <Card.Header>{sessionDate} - {sessionTime}</Card.Header>
           </Card.Content>
 
           <Card.Content extra>
@@ -41,9 +46,9 @@ class StudySession extends React.Component {
   }
 }
 
-/** Require a document to be passed to this component. */
+/** Takes in an array. */
 StudySession.propTypes = {
-  studySession: PropTypes.object.isRequired,
+  studySession: PropTypes.array.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

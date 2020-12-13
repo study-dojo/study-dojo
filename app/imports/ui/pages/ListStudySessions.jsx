@@ -1,15 +1,18 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Card, Button } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */
 class ListStudySessions extends React.Component {
+
   // Handles when user clicks "Notification" button
   handleClick(e) {
     e.preventDefault();
@@ -48,6 +51,12 @@ class ListStudySessions extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
+    // pulls _id from all registered study sessions
+    const sessionId = _.pluck(this.props.registeredSessions, 'session');
+
+    // finds all study sessions that matches sessionId
+    const regStudySessions = sessionId.map(e => StudySessions.collection.find({ _id: e }).fetch());
+
     return (
         <div>
           <Container id="session-list">
@@ -59,8 +68,8 @@ class ListStudySessions extends React.Component {
             </Card.Content>
 
             <Card.Group>
-              {this.props.studySessions.map((studySession, index) => <StudySession key={index}
-                                                                                   studySession={studySession}/>)}
+              {regStudySessions.map((data, index) => <StudySession key={index}
+                                                                   studySession={data}/>)}
             </Card.Group>
           </Container>
         </div>
@@ -71,6 +80,7 @@ class ListStudySessions extends React.Component {
 /** Require an array of Stuff documents in the props. */
 ListStudySessions.propTypes = {
   studySessions: PropTypes.array.isRequired,
+  registeredSessions: PropTypes.array.isRequired,
   alert: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -79,10 +89,12 @@ ListStudySessions.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const sub1 = Meteor.subscribe(StudySessions.userPublicationName);
-  const sub2 = Meteor.subscribe(Alerts.userPublicationName);
+  const sub2 = Meteor.subscribe(RegisteredSessions.userPublicationName);
+  const sub3 = Meteor.subscribe(Alerts.userPublicationName);
   return {
     studySessions: StudySessions.collection.find({}).fetch(),
+    registeredSessions: RegisteredSessions.collection.find({}).fetch(),
     alert: Alerts.collection.find({}).fetch(),
-    ready: sub1.ready() && sub2.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready(),
   };
 })(ListStudySessions);

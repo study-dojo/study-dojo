@@ -3,10 +3,10 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /** Encapsulates state and variable values for this collection. */
-class SessionOwnersCollection {
+class RegisteredSessionsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'SessionOwnersCollection';
+    this.name = 'RegisteredSessions';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
@@ -22,4 +22,4 @@ class SessionOwnersCollection {
   }
 }
 
-export const SessionOwners = new SessionOwnersCollection();
+export const RegisteredSessions = new RegisteredSessionsCollection();

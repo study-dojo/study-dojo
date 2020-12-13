@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Dojos } from '../../api/dojo/Dojo';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { StudySessions } from '../../api/studySession/StudySessions';
-import { SessionOwners } from '../../api/studySession/SessionOwner';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
 
@@ -19,18 +19,10 @@ Meteor.publish(Dojos.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(StudySessions.userPublicationName, function () {
+Meteor.publish(RegisteredSessions.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return StudySessions.collection.find({ owner: username });
-  }
-  return this.ready();
-});
-
-Meteor.publish(SessionOwners.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return StudySessions.collection.find({ owner: username });
+    return RegisteredSessions.collection.find({ owner: username });
   }
   return this.ready();
 });
@@ -43,10 +35,17 @@ Meteor.publish(Alerts.userPublicationName, function () {
   return this.ready();
 });
 
-// Publish to all users to find other users that attend the same class
+// Publish to all users
 Meteor.publish(DojoOwners.userPublicationName, function () {
   if (this.userId) {
     return DojoOwners.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(StudySessions.userPublicationName, function () {
+  if (this.userId) {
+    return StudySessions.collection.find();
   }
   return this.ready();
 });

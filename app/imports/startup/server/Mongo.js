@@ -1,15 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { Dojos } from '../../api/dojo/Dojo';
-import { StudySessions } from '../../api/studySession/StudySessions';
-import { SessionOwners } from '../../api/studySession/SessionOwner';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
+import { StudySessions } from '../../api/studySession/StudySessions';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 
 /* eslint-disable no-console */
 
 /** Initialize the database with a default study session document. */
 function addStudySession(data) {
   console.log(`  Adding: ${data.topic} (${data.owner})`);
-  const documentId = StudySessions.collection.insert(data);
+  const docId = StudySessions.collection.insert(data);
+  RegisteredSessions.collection.insert({ session: docId, owner: data.owner });
 }
 
 /** Initialize the database with a default data dojo document. */
