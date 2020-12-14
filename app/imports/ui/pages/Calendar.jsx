@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import FullCalendar from '@fullcalendar/react';
@@ -17,6 +18,12 @@ class Calendar extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
+    const title = _.pluck(this.props.studySessions, 'title');
+    const className = _.pluck(this.props.studySessions, 'className');
+    const date = _.pluck(this.props.studySessions, 'date');
+    const events = _.map(title, function (v, i) {
+      return { title: `${v} - ${className[i]}`, date: `${date[i]}` };
+    });
     return (
         <Container id="my-calender-page">
           <Header as="h2" textAlign="center" inverted>Calendar</Header>
@@ -25,7 +32,7 @@ class Calendar extends React.Component {
               initialView="dayGridMonth"
               timeZone={'UTC'}
               events={
-                this.props.studySessions
+                events
               }
           />
         </Container>
