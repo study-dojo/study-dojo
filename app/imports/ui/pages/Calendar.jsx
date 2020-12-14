@@ -18,9 +18,11 @@ class Calendar extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
+    // extract info for Calendar events
     const title = _.pluck(this.props.studySessions, 'title');
     const className = _.pluck(this.props.studySessions, 'className');
     const date = _.pluck(this.props.studySessions, 'date');
+    // combine info as an event array
     const events = _.map(title, function (v, i) {
       return { title: `${v} - ${className[i]}`, date: `${date[i]}` };
     });
