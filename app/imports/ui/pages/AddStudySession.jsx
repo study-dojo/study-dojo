@@ -30,7 +30,6 @@ class AddStudySession extends React.Component {
     const { title, className } = data;
     let { date } = data;
     date = date.toISOString();
-    console.log(date);
     const owner = Meteor.user().username;
     const sessionId = StudySessions.collection.insert({ title, className, date, owner },
         (error) => {

@@ -17,7 +17,6 @@ class Calendar extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    console.log(this.props.studySessions);
     return (
         <Container id="my-calender-page">
           <Header as="h2" textAlign="center" inverted>Calendar</Header>
