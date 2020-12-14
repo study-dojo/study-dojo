@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, DateField, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
@@ -15,10 +15,9 @@ import { Alerts } from '../../api/alert/Alerts';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
-  topic: String,
+  title: String,
   className: String,
-  sessionDate: String,
-  sessionTime: String,
+  date: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -28,9 +27,12 @@ class AddStudySession extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { topic, className, sessionDate, sessionTime } = data;
+    const { title, className } = data;
+    let { date } = data;
+    date = date.toISOString();
+    console.log(date);
     const owner = Meteor.user().username;
-    const sessionId = StudySessions.collection.insert({ topic, className, sessionDate, sessionTime, owner },
+    const sessionId = StudySessions.collection.insert({ title, className, date, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -45,10 +47,9 @@ class AddStudySession extends React.Component {
             // Insert an alert for all other users
             sameOwners.map((entry) => Alerts.collection.insert({
               owner: entry,
-              topic: topic,
+              title: title,
               className: className,
-              sessionDate: sessionDate,
-              sessionTime: sessionTime,
+              date: date,
               sessionId: sessionId,
             }));
           }
@@ -67,10 +68,9 @@ class AddStudySession extends React.Component {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment className='AddForm'>
-                <TextField id="topic-field" name='topic'/>
+                <TextField id="title-field" name='title'/>
                 <TextField id="className-field" name='className'/>
-                <TextField id="sessionDate-field" name='sessionDate'/>
-                <TextField id="sessionTime-field" name='sessionTime'/>
+                <DateField id="date-field" name='date' />
                 <SubmitField id="add-submit" value='Submit'/>
                 <ErrorsField/>
               </Segment>

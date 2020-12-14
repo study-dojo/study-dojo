@@ -27,7 +27,6 @@ class StudySession extends React.Component {
               const session = RegisteredSessions.collection.find({ session: documentId }).fetch();
               // converts array to string
               const id = _.pluck(session, '_id');
-              console.log(id);
               id.map(data => RegisteredSessions.collection.remove(data));
               swal('Study session deleted');
             }
@@ -53,16 +52,61 @@ class StudySession extends React.Component {
   }
 
   render() {
-    const topic = _.pluck(this.props.studySession, 'topic');
+    const title = _.pluck(this.props.studySession, 'title');
     const className = _.pluck(this.props.studySession, 'className');
-    const sessionDate = _.pluck(this.props.studySession, 'sessionDate');
-    const sessionTime = _.pluck(this.props.studySession, 'sessionTime');
+    const date = _.pluck(this.props.studySession, 'date');
+    const day = date[0].slice(8, 10);
+    const month = date[0].slice(5, 7);
+    const year = date[0].slice(0, 4);
+    let time = date[0].slice(11, 16);
+    // converts time to am/pm form
+    switch (time.slice(0, 2)) {
+      case '12':
+        time = `${time} pm`;
+        break;
+      case '13':
+        time = `1${time.slice(2)} pm`;
+        break;
+      case '14':
+        time = `2${time.slice(2)} pm`;
+        break;
+      case '15':
+        time = `3${time.slice(2)} pm`;
+        break;
+      case '16':
+        time = `4${time.slice(2)} pm`;
+        break;
+      case '17':
+        time = `5${time.slice(2)} pm`;
+        break;
+      case '18':
+        time = `6${time.slice(2)} pm`;
+        break;
+      case '19':
+        time = `7${time.slice(2)} pm`;
+        break;
+      case '20':
+        time = `8${time.slice(2)} pm`;
+        break;
+      case '21':
+        time = `9${time.slice(2)} pm`;
+        break;
+      case '22':
+        time = `10${time.slice(2)} pm`;
+        break;
+      case '23':
+        time = `11${time.slice(2)} pm`;
+        break;
+      default:
+        time = `${time} am`;
+        break;
+    }
     return (
         <Card centered>
           <Card.Content>
-            <Card.Header>{topic}</Card.Header>
+            <Card.Header>{title}</Card.Header>
             <Card.Header>{className}</Card.Header>
-            <Card.Header>{sessionDate} - {sessionTime}</Card.Header>
+            <Card.Header>{month}/{day}/{year} - {time}</Card.Header>
           </Card.Content>
 
           <Card.Content extra>

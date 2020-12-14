@@ -25,9 +25,9 @@ class ListStudySessions extends React.Component {
   /* Creates message asking if user wants to attend study session
    * Clicking ok, adds study session for user */
   createAlertMessage(data, documentId) {
-    const { owner, topic, className, sessionDate, sessionTime, sessionId } = data;
+    const { owner, title, className, date, sessionId } = data;
     swal({
-      title: `Do you want to attend a study session about ${topic} for ${className} on ${sessionDate} at ${sessionTime}`,
+      title: `Do you want to attend a study session about ${title} for ${className} on ${date}`,
       buttons: true,
     })
         .then((willDelete) => {

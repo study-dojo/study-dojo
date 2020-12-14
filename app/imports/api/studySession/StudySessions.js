@@ -11,10 +11,9 @@ class StudySessionsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      topic: String,
+      title: String,
       className: String,
-      sessionDate: String,
-      sessionTime: String,
+      date: String,
       owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

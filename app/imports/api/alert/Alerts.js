@@ -12,10 +12,9 @@ class AlertCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       owner: String,
-      topic: String,
+      title: String,
       className: String,
-      sessionDate: String,
-      sessionTime: String,
+      date: String,
       sessionId: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
