@@ -22,8 +22,8 @@ class MyProfile extends React.Component {
 
   /** On submit, insert the data. */
   submit(data) {
-    const { _id, firstName, lastName, pic, bio } = data;
-    Profiles.collection.update(_id, { $set: { firstName, lastName, pic, bio } }, (error) => {
+    const { _id, firstName, lastName, bio, picture } = data;
+    Profiles.collection.update(_id, { $set: { firstName, lastName, bio, picture } }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
