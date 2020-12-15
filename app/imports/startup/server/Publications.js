@@ -7,6 +7,7 @@ import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
+import { Leaderboard } from '../../api/leaderboard/Leaderboard';
 
 Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
 
@@ -50,6 +51,13 @@ Meteor.publish(RegisteredSessions.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Leaderboard.userPublicationName, function () {
+  if (this.userId) {
+    return Leaderboard.collection.find();
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(StudySessions.adminPublicationName, function () {
@@ -66,6 +74,12 @@ Meteor.publish(ReportedProfiles.adminPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Leaderboard.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Leaderboard.collection.find();
+  }
+  return this.ready();
+});
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {

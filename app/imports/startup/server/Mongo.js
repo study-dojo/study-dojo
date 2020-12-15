@@ -5,6 +5,7 @@ import { Profiles } from '../../api/profiles/Profiles';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
+import { Leaderboard } from '../../api/leaderboard/Leaderboard';
 
 /* eslint-disable no-console */
 
@@ -26,6 +27,11 @@ function addDojo(data) {
 function addProfile({ email, firstName, lastName, bio, picture }) {
   console.log(`  Defining profile ${email}`);
   Profiles.collection.insert({ email, firstName, lastName, bio, picture });
+}
+
+function addLeaderboard(data) {
+  console.log(`Adding to leaderboard: ${data.profile} (${data.points})`);
+  Leaderboard.collection.insert(data);
 }
 
 /** Initialize the database with a default profile document. */
@@ -55,6 +61,14 @@ if (StudySessions.collection.find().count() === 0) {
   if (Meteor.settings.defaultStudySessions) {
     console.log('Creating default Study Sessions.');
     Meteor.settings.defaultStudySessions.map(data => addStudySession(data));
+  }
+}
+
+/** Initialize the leaderboard if empty. */
+if (Leaderboard.collection.find().count() === 0) {
+  if (Meteor.settings.defaultLeaderboard) {
+    console.log('Creating default leaderboard.');
+    Meteor.settings.defaultLeaderboard.map(data => addLeaderboard(data));
   }
 }
 
