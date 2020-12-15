@@ -10,7 +10,7 @@ import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 /** Initialize the database with a default study session document. */
 function addStudySession(data) {
-  console.log(`  Adding: ${data.topic} (${data.owner})`);
+  console.log(`  Adding: ${data.title} (${data.owner})`);
   const docId = StudySessions.collection.insert(data);
   RegisteredSessions.collection.insert({ session: docId, owner: data.owner });
 }
@@ -33,6 +33,7 @@ function addReport(data) {
   console.log(`  Adding Report: ${data.user}`);
   ReportedProfiles.collection.insert(data);
 }
+
 /** Initialize the collection if empty. */
 if (ReportedProfiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultReports) {
@@ -40,6 +41,7 @@ if (ReportedProfiles.collection.find().count() === 0) {
     Meteor.settings.defaultReports.map(data => addReport(data));
   }
 }
+
 /** Initialize the collection if empty. */
 if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfiles) {
@@ -64,10 +66,10 @@ if (Dojos.collection.find().count() === 0) {
   }
 }
 
-/** Initialize the peoples collection with 50 people. */
+/** Initialize the peoples collection with 50 people.
 if ((Meteor.settings.loadAssetsFile) && (Profiles.collection.find().count() === 0)) {
   const assetsFileName = 'data.json';
   console.log(`Loading data from private/${assetsFileName}`);
   const jsonData = JSON.parse(Assets.getText(assetsFileName));
   jsonData.profiles.map(profile => addProfile(profile));
-}
+} */

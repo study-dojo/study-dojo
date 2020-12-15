@@ -70,7 +70,7 @@ class MyProfile extends React.Component {
                       <Progress value='3' total='5' progress='ratio'/>
                     </Card.Content>
                   </Card>
-                <Divider hidden/>
+                  <Divider hidden/>
                 </Grid.Row>
                 <Grid.Row>
                   <AutoForm model={profile} schema={bridge} onSubmit={data => this.submit(data)}>
