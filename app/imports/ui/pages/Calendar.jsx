@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import swal from 'sweetalert';
 import { StudySessions } from '../../api/studySession/StudySessions';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -36,6 +37,11 @@ class Calendar extends React.Component {
               events={
                 events
               }
+              eventClick={ function (info) {
+                swal({
+                  title: `Event: ${info.event.title}`,
+                });
+              }}
           />
         </Container>
     );
