@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStudySessions from '../pages/ListStudySessions';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListStuffAdmin from '../pages/ReportedUsersAdmin';
 import AddDojo from '../pages/AddDojo';
 import AddStudySession from '../pages/AddStudySession';
 import EditStuff from '../pages/EditStuff';
