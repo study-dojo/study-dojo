@@ -29,8 +29,8 @@ function addProfile({ email, firstName, lastName, bio, picture }) {
   Profiles.collection.insert({ email, firstName, lastName, bio, picture });
 }
 
-function addLeaderboard(data) {
-  console.log(`Adding to leaderboard: ${data.profile} (${data.points})`);
+function addRanking(data) {
+  console.log(`Adding to rankings: ${data.profile} (${data.points})`);
   Points.collection.insert(data);
 }
 
@@ -66,9 +66,9 @@ if (StudySessions.collection.find().count() === 0) {
 
 /** Initialize the leaderboard if empty. */
 if (Points.collection.find().count() === 0) {
-  if (Meteor.settings.defaultLeaderboard) {
-    console.log('Creating default leaderboard.');
-    Meteor.settings.defaultLeaderboard.map(data => addLeaderboard(data));
+  if (Meteor.settings.defaultRankings) {
+    console.log('Creating default rankings.');
+    Meteor.settings.defaultRankings.map(data => addRanking(data));
   }
 }
 
