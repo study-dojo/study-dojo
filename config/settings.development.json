@@ -29,6 +29,13 @@
       "reportReason": "Cheating",
       "reportDescription": "Farming Points",
       "reportBy": "john@foo.com"
+    },
+
+    {
+      "user": "bob@foo",
+      "reportReason": "Cheating",
+      "reportDescription": "Farming Points",
+      "reportBy": "rob@foo.com"
     }
   ],
   "loadAssetsFile": true
