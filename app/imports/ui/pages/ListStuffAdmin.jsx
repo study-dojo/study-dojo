@@ -3,8 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
 import StuffItemAdmin from '../components/StuffItemAdmin';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
+import ReportItemAdmin from '../components/ReportItemAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuffAdmin extends React.Component {
@@ -18,18 +19,18 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center">List Stuff (Admin)</Header>
+          <Header as="h2" textAlign="center" inverted>List Stuff (Admin)</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Quantity</Table.HeaderCell>
-                <Table.HeaderCell>Condition</Table.HeaderCell>
-                <Table.HeaderCell>Owner</Table.HeaderCell>
+                <Table.HeaderCell>Reported User</Table.HeaderCell>
+                <Table.HeaderCell>Report Reason</Table.HeaderCell>
+                <Table.HeaderCell>Report Description</Table.HeaderCell>
+                <Table.HeaderCell>Reported by</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
+              {this.props.reportedProfiles.map((reportedProfiles) => <ReportItemAdmin key={reportedProfiles._id} reportedProfiles={reportedProfiles} />)}
             </Table.Body>
           </Table>
         </Container>
@@ -39,16 +40,16 @@ class ListStuffAdmin extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 ListStuffAdmin.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  reportedProfiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.adminPublicationName);
+  const subscription = Meteor.subscribe(ReportedProfiles.adminPublicationName);
   return {
-    stuffs: Stuffs.collection.find({}).fetch(),
+    reportedProfiles: ReportedProfiles.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(ListStuffAdmin);

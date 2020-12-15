@@ -22,5 +22,14 @@
 
     { "topic":  "Exam Study", "className":  "ICS 311", "status":  "grasshopper", "sessionDate": "11/17/2020", "sessionTime": "5:00 pm", "owner":  "john@foo.com"}
   ],
+
+  "defaultReports": [
+    {
+      "user": "bob@foo",
+      "reportReason": "Cheating",
+      "reportDescription": "Farming Points",
+      "reportBy": "john@foo.com"
+    }
+  ],
   "loadAssetsFile": true
 }

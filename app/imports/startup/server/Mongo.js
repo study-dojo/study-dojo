@@ -3,6 +3,7 @@ import { Dojos } from '../../api/dojo/Dojo';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { Profiles } from '../../api/profiles/Profiles';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 /* eslint-disable no-console */
 
@@ -25,6 +26,18 @@ function addProfile({ email, firstName, lastName, bio, picture }) {
   Profiles.collection.insert({ email, firstName, lastName, bio, picture });
 }
 
+/** Initialize the database with a default profile document. */
+function addReport(data) {
+  console.log(`  Adding Report: ${data.user}`);
+  ReportedProfiles.collection.insert(data);
+}
+/** Initialize the collection if empty. */
+if (ReportedProfiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultReports) {
+    console.log('Creating default Reports.');
+    Meteor.settings.defaultReports.map(data => addReport(data));
+  }
+}
 /** Initialize the collection if empty. */
 if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfiles) {

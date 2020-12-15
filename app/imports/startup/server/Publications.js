@@ -5,6 +5,7 @@ import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
 
@@ -47,6 +48,13 @@ Meteor.publish(DojoOwners.userPublicationName, function () {
 Meteor.publish(StudySessions.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return StudySessions.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(ReportedProfiles.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return ReportedProfiles.collection.find();
   }
   return this.ready();
 });
