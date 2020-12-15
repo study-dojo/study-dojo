@@ -6,6 +6,7 @@ import { StudySessions } from '../../api/studySession/StudySessions';
 import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
 
@@ -54,6 +55,13 @@ Meteor.publish(RegisteredSessions.userPublicationName, function () {
 Meteor.publish(StudySessions.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return StudySessions.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(ReportedProfiles.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return ReportedProfiles.collection.find();
   }
   return this.ready();
 });

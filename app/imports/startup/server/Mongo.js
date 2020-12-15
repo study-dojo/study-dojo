@@ -4,6 +4,7 @@ import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { Profiles } from '../../api/profiles/Profiles';
 import { StudySessions } from '../../api/studySession/StudySessions';
 import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 /* eslint-disable no-console */
 
@@ -22,9 +23,29 @@ function addDojo(data) {
 }
 
 /** Initialize the database with a default profile document. */
-function addProfile({ firstName, lastName, bio, email }) {
+function addProfile({ email, firstName, lastName, bio, picture }) {
   console.log(`  Defining profile ${email}`);
-  Profiles.collection.insert({ firstName, lastName, bio, email });
+  Profiles.collection.insert({ email, firstName, lastName, bio, picture });
+}
+
+/** Initialize the database with a default profile document. */
+function addReport(data) {
+  console.log(`  Adding Report: ${data.user}`);
+  ReportedProfiles.collection.insert(data);
+}
+/** Initialize the collection if empty. */
+if (ReportedProfiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultReports) {
+    console.log('Creating default Reports.');
+    Meteor.settings.defaultReports.map(data => addReport(data));
+  }
+}
+/** Initialize the collection if empty. */
+if (Profiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultProfiles) {
+    console.log('Creating default Profiles.');
+    Meteor.settings.defaultProfiles.map(data => addProfile(data));
+  }
 }
 
 /** Initialize the collection if empty. */

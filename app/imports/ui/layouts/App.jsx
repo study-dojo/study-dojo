@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStudySessions from '../pages/ListStudySessions';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListStuffAdmin from '../pages/ReportedUsersAdmin';
 import AddDojo from '../pages/AddDojo';
 import AddStudySession from '../pages/AddStudySession';
 import EditStuff from '../pages/EditStuff';
@@ -19,6 +19,7 @@ import Signout from '../pages/Signout';
 import MyDojo from '../pages/MyDojo';
 import Calendar from '../pages/Calendar';
 import MyProfile from '../pages/MyProfile';
+import Report from '../pages/Report';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,6 +33,7 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <ProtectedRoute path="/calendar" component={Calendar}/>
+              <ProtectedRoute path="/report" component={Report}/>
               <ProtectedRoute path="/mydojo" component={MyDojo}/>
               <ProtectedRoute path="/myprofile" component={MyProfile}/>
               <ProtectedRoute path="/list" component={ListStudySessions}/>

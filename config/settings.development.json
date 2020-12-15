@@ -5,6 +5,12 @@
     { "email": "bob@foo.com", "password": "changeme" }
   ],
 
+  "defaultProfiles": [
+    { "email": "admin@foo.com", "firstName": "admin", "lastName": "admin", "bio": "admin account bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
+    { "email": "john@foo.com", "firstName": "John", "lastName": "doe", "bio": "Default Bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
+    { "email": "bob@foo.com", "firstName": "Bob", "lastName": "Smith", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" }
+  ],
+
   "defaultDojo": [
     { "className": "ICS 314", "status": "grasshopper", "owner": "john@foo.com" },
     { "className": "ICS 311", "status": "grasshopper", "owner": "john@foo.com" },
@@ -15,6 +21,15 @@
     { "title": "HW Help", "className": "ICS 311", "date": "2020-12-15T12:30:00.000Z",  "owner": "john@foo.com" },
 
     { "title":  "Exam Study", "className":  "ICS 311", "date": "2020-12-19T05:00:00.000Z", "owner":  "john@foo.com"}
+  ],
+
+  "defaultReports": [
+    {
+      "user": "bob@foo",
+      "reportReason": "Cheating",
+      "reportDescription": "Farming Points",
+      "reportBy": "john@foo.com"
+    }
   ],
 
   "loadAssetsFile": true
