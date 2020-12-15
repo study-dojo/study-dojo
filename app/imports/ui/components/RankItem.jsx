@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class Leaderboard extends React.Component {
+class RankItem extends React.Component {
   render() {
     return (
         <Table.Row>
@@ -16,9 +16,9 @@ class Leaderboard extends React.Component {
 }
 
 /** Require a document to be passed to this component. */
-Leaderboard.propTypes = {
+RankItem.propTypes = {
   leaderboard: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(Leaderboard);
+export default withRouter(RankItem);

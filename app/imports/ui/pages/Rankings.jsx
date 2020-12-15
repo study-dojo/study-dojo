@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Leaderboard } from '../../api/leaderboard/Leaderboard';
+import { Points } from '../../api/points/Points';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Rankings extends React.Component {
@@ -26,7 +26,7 @@ class Rankings extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.leaderboard.map((leaderboard) => <Leaderboard key={leaderboard._id} leaderboard={leaderboard} />)}
+              {this.props.leaderboard.map((leaderboard) => <Points key={leaderboard._id} leaderboard={leaderboard} />)}
             </Table.Body>
           </Table>
         </Container>
@@ -43,9 +43,9 @@ Rankings.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Leaderboard.adminPublicationName);
+  const subscription = Meteor.subscribe(Points.adminPublicationName);
   return {
-    leaderboard: Leaderboard.collection.find({}).fetch(),
+    leaderboard: Points.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Rankings);

@@ -22,4 +22,4 @@ class LeaderboardCollection {
   }
 }
 
-export const Leaderboard = new LeaderboardCollection();
+export const Points = new LeaderboardCollection();

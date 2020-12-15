@@ -7,7 +7,7 @@ import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
-import { Leaderboard } from '../../api/leaderboard/Leaderboard';
+import { Points } from '../../api/points/Points';
 
 Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
 
@@ -51,9 +51,9 @@ Meteor.publish(RegisteredSessions.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Leaderboard.userPublicationName, function () {
+Meteor.publish(Points.userPublicationName, function () {
   if (this.userId) {
-    return Leaderboard.collection.find();
+    return Points.collection.find();
   }
   return this.ready();
 });
@@ -74,9 +74,9 @@ Meteor.publish(ReportedProfiles.adminPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Leaderboard.adminPublicationName, function () {
+Meteor.publish(Points.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Leaderboard.collection.find();
+    return Points.collection.find();
   }
   return this.ready();
 });
