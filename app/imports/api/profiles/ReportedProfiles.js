@@ -13,7 +13,7 @@ class ReportedProfilesCollection {
     this.schema = new SimpleSchema({
       user: { type: String },
       reportReason: { type: String },
-      reportDescription: { type: String, optional: true },
+      reportDescription: { type: String },
       reportBy: { type: String },
     }, { tracker: Tracker });
     // Ensure collection documents obey schema.
