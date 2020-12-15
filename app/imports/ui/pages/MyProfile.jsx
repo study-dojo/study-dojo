@@ -8,8 +8,6 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Profiles } from '../../api/profiles/Profiles';
-// import { updateProfileMethod } from '../../startup/both/Methods';
-import updateProfileMethod from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({

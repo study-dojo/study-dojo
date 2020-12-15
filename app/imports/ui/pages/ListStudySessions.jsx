@@ -26,8 +26,55 @@ class ListStudySessions extends React.Component {
    * Clicking ok, adds study session for user */
   createAlertMessage(data, documentId) {
     const { owner, title, className, date, sessionId } = data;
+    const day = date.slice(8, 10);
+    const month = date.slice(5, 7);
+    const year = date.slice(0, 4);
+    let time = date.slice(11, 16);
+    // converts time to am/pm form
+    switch (time.slice(0, 2)) {
+      case '12':
+        time = `${time} pm`;
+        break;
+      case '13':
+        time = `1${time.slice(2)} pm`;
+        break;
+      case '14':
+        time = `2${time.slice(2)} pm`;
+        break;
+      case '15':
+        time = `3${time.slice(2)} pm`;
+        break;
+      case '16':
+        time = `4${time.slice(2)} pm`;
+        break;
+      case '17':
+        time = `5${time.slice(2)} pm`;
+        break;
+      case '18':
+        time = `6${time.slice(2)} pm`;
+        break;
+      case '19':
+        time = `7${time.slice(2)} pm`;
+        break;
+      case '20':
+        time = `8${time.slice(2)} pm`;
+        break;
+      case '21':
+        time = `9${time.slice(2)} pm`;
+        break;
+      case '22':
+        time = `10${time.slice(2)} pm`;
+        break;
+      case '23':
+        time = `11${time.slice(2)} pm`;
+        break;
+      default:
+        time = `${time} am`;
+        break;
+    }
     swal({
-      title: `Do you want to attend a study session about ${title} for ${className} on ${date}`,
+      title: 'Do you want to attend a study session?',
+      text: `${title} for ${className} on ${month}/${day}/${year} at ${time}`,
       buttons: true,
     })
         .then((willDelete) => {
@@ -47,7 +94,9 @@ class ListStudySessions extends React.Component {
   renderPage() {
     // pulls _id from all registered study sessions belonging to the user
     const owner = Meteor.user().username;
-    const filteredSessions = _.filter(RegisteredSessions.collection.find({}).fetch(), function (data) { return data.owner === owner; });
+    const filteredSessions = _.filter(RegisteredSessions.collection.find({}).fetch(), function (data) {
+      return data.owner === owner;
+    });
     const sessionId = _.pluck(filteredSessions, 'session');
 
     // finds all study sessions that matches sessionId

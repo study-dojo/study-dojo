@@ -13,6 +13,7 @@ import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 class StudySession extends React.Component {
   handleClick(e, documentId) {
     const owner = Meteor.user().username;
+    // if creator of session, delete for everyone
     if (StudySessions.collection.find({ $and: [{ _id: documentId, owner: owner }] }).count() !== 0) {
       e.preventDefault();
       swal({
