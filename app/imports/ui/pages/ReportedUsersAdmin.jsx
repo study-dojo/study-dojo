@@ -3,12 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import StuffItemAdmin from '../components/StuffItemAdmin';
-import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 import ReportItemAdmin from '../components/ReportItemAdmin';
+import { ReportedProfiles } from '../../api/profiles/ReportedProfiles';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListStuffAdmin extends React.Component {
+class ReportedUsersAdmin extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -19,7 +18,7 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Stuff (Admin)</Header>
+          <Header as="h2" textAlign="center" inverted>Reported Users (Admin)</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -39,7 +38,7 @@ class ListStuffAdmin extends React.Component {
 }
 
 /** Require an array of Stuff documents in the props. */
-ListStuffAdmin.propTypes = {
+ReportedUsersAdmin.propTypes = {
   reportedProfiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -52,4 +51,4 @@ export default withTracker(() => {
     reportedProfiles: ReportedProfiles.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(ListStuffAdmin);
+})(ReportedUsersAdmin);
