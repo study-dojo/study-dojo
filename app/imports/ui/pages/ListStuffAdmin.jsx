@@ -19,7 +19,7 @@ class ListStuffAdmin extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Stuff (Admin)</Header>
+          <Header as="h2" textAlign="center" inverted>Reported Users (Admin)</Header>
           <Table celled>
             <Table.Header>
               <Table.Row>
