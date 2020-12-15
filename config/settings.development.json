@@ -5,6 +5,12 @@
     { "email": "bob@foo.com", "password": "changeme" }
   ],
 
+  "defaultProfiles": [
+    { "email": "admin@foo.com", "firstName": "admin", "lastName": "admin", "bio": "admin account bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
+    { "email": "john@foo.com", "firstName": "John", "lastName": "doe", "bio": "Default Bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
+    { "email": "bob@foo.com", "firstName": "changeme", "lastName": "admin", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" }
+  ],
+
   "defaultDojo": [
     { "className": "ICS 314", "status": "grasshopper", "owner": "john@foo.com" },
     { "className": "ICS 311", "status": "grasshopper", "owner": "john@foo.com" },

@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Profiles } from '../../api/profiles/Profiles';
-import { updateProfileMethod } from '../../startup/both/Methods';
+import updateProfileMethod from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -50,14 +50,14 @@ class MyProfile extends React.Component {
             <Grid.Row>
               <Grid.Column width={4}>
                 <Card>
-                  <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false}/>
+                  <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" wrapped ui={false}/>
                   <Card.Content>
-                    <Card.Header>My Name</Card.Header>
+                    <Card.Header>{profile.firstName} {profile.lastName}</Card.Header>
                     <Card.Meta>
                       <span>{email}</span>
                     </Card.Meta>
                     <Card.Description>
-                      My Bio...
+                      {profile.bio}
                     </Card.Description>
                   </Card.Content>
                 </Card>
@@ -79,7 +79,7 @@ class MyProfile extends React.Component {
                         <TextField id='lastName' name='lastName' showInlineError={true} placeholder={'Last Name'}/>
                         <Form.Input fluid label='Email' placeholder={email} readOnly/>
                       </Form.Group>
-                      <TextField name='picture' showInlineError={true} placeholder={'Image URL'}/>
+                      <TextField id='picture' name='picture' showInlineError={true} placeholder={'Image URL'}/>
                       <LongTextField id='bio' name='bio' placeholder='Write a little bit about yourself.'/>
                       <SubmitField id='profile-update' value='Update Profile'/>
                     </Segment>

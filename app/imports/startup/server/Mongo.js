@@ -20,9 +20,17 @@ function addDojo(data) {
 }
 
 /** Initialize the database with a default profile document. */
-function addProfile({ firstName, lastName, bio, email }) {
+function addProfile({ email, firstName, lastName, bio, picture }) {
   console.log(`  Defining profile ${email}`);
-  Profiles.collection.insert({ firstName, lastName, bio, email });
+  Profiles.collection.insert({ email, firstName, lastName, bio, picture });
+}
+
+/** Initialize the collection if empty. */
+if (Profiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultProfiles) {
+    console.log('Creating default Profiles.');
+    Meteor.settings.defaultProfiles.map(data => addProfile(data));
+  }
 }
 
 /** Initialize the collection if empty. */
