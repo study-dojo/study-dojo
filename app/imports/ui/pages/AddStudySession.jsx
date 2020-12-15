@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, DateField, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
@@ -9,12 +9,13 @@ import { PropTypes } from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { Alerts } from '../../api/alert/Alerts';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
-  topic: String,
+  title: String,
   className: {
     type: String,
     allowedValues: ['ICS 101', 'ICS 102', 'ICS 103', 'ICS 110', 'ICS 111', 'ICS 141', 'ICS 210',
@@ -28,32 +29,29 @@ const formSchema = new SimpleSchema({
       'ICS 495', 'ICS 496', 'ICS 499'],
     defaultValue: 'ICS 111',
   },
-  status: String,
-  sessionDate: String,
-  sessionTime: String,
+  date: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
-
-const statusOptions = [
-  { label: 'Grasshopper', value: 'grasshopper', id: 'grasshopper' },
-  { label: 'Sensei', value: 'sensei', id: 'sensei' },
-];
 
 /** Renders the Page for adding a document. */
 class AddStudySession extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { topic, className, status, sessionDate, sessionTime } = data;
+    const { title, className } = data;
+    let { date } = data;
+    date = date.toISOString();
     const owner = Meteor.user().username;
-    StudySessions.collection.insert({ topic, className, status, sessionDate, sessionTime, owner },
+    const sessionId = StudySessions.collection.insert({ title, className, date, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
+            // Register study session for owner
+            RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             // find all other users that are registered under the same class
             const sameOwners = _.without(_.pluck(DojoOwners.collection.find({ className: className })
                 .fetch(), 'owner'), owner);
@@ -61,10 +59,10 @@ class AddStudySession extends React.Component {
             // Insert an alert for all other users
             sameOwners.map((entry) => Alerts.collection.insert({
               owner: entry,
-              topic: topic,
+              title: title,
               className: className,
-              sessionDate: sessionDate,
-              sessionTime: sessionTime,
+              date: date,
+              sessionId: sessionId,
             }));
           }
         });
@@ -82,11 +80,9 @@ class AddStudySession extends React.Component {
               fRef = ref;
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment className='AddForm'>
-                <TextField id="topic-field" name='topic'/>
+                <TextField id="title-field" name='title'/>
                 <SelectField id="className-dropdown" name='className'/>
-                <SelectField id="status-dropdown" name='status' options={statusOptions}/>
-                <TextField id="sessionDate-field" name='sessionDate'/>
-                <TextField id="sessionTime-field" name='sessionTime'/>
+                <DateField id="date-field" name='date'/>
                 <SubmitField id="add-submit" value='Submit'/>
                 <ErrorsField/>
               </Segment>

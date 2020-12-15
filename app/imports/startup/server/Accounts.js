@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
+import { Profiles } from '../../api/profiles/Profiles';
+// import { updateProfileMethod } from '../both/Methods';
 
 /* eslint-disable no-console */
 
@@ -15,6 +17,7 @@ function createUser(email, password, role) {
     Roles.createRole(role, { unlessExists: true });
     Roles.addUsersToRoles(userID, 'admin');
   }
+  Profiles.collection.insert({ email });
 }
 
 /** When running app for first time, pass a settings file to set up a default user account. */

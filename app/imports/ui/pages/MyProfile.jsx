@@ -8,11 +8,10 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Profiles } from '../../api/profiles/Profiles';
-import { updateProfileMethod } from '../../startup/both/Methods';
+// import { updateProfileMethod } from '../../startup/both/Methods';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
-  email: { type: String, label: 'Email', optional: true },
   firstName: { type: String, label: 'First', optional: true },
   lastName: { type: String, label: 'Last', optional: true },
   bio: { type: String, label: 'Bio', optional: true },
@@ -24,7 +23,8 @@ class MyProfile extends React.Component {
 
   /** On submit, insert the data. */
   submit(data) {
-    Meteor.call(updateProfileMethod, data, (error) => {
+    const { _id, firstName, lastName, pic, bio } = data;
+    Profiles.collection.update(_id, { $set: { firstName, lastName, pic, bio } }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
@@ -77,7 +77,6 @@ class MyProfile extends React.Component {
                       <Form.Group widths={'equal'}>
                         <TextField id='firstName' name='firstName' showInlineError={true} placeholder={'First Name'}/>
                         <TextField id='lastName' name='lastName' showInlineError={true} placeholder={'Last Name'}/>
-                        <Form.Input fluid label='Email' placeholder={email} readOnly/>
                       </Form.Group>
                       <TextField name='picture' showInlineError={true} placeholder={'Image URL'}/>
                       <LongTextField id='bio' name='bio' placeholder='Write a little bit about yourself.'/>

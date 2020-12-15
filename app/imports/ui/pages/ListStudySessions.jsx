@@ -1,15 +1,18 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Header, Loader, Card, Button } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import StudySession from '../components/StudySession';
 import { StudySessions } from '../../api/studySession/StudySessions';
+import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { Alerts } from '../../api/alert/Alerts';
 
 /** Renders cards from components/StudySession.jsx. */
 class ListStudySessions extends React.Component {
+
   // Handles when user clicks "Notification" button
   handleClick(e) {
     e.preventDefault();
@@ -22,21 +25,14 @@ class ListStudySessions extends React.Component {
   /* Creates message asking if user wants to attend study session
    * Clicking ok, adds study session for user */
   createAlertMessage(data, documentId) {
-    const { owner, topic, className, sessionDate, sessionTime } = data;
+    const { owner, title, className, date, sessionId } = data;
     swal({
-      title: `Do you want to attend a study session about ${topic} for ${className} on ${sessionDate} at ${sessionTime}`,
+      title: `Do you want to attend a study session about ${title} for ${className} on ${date}`,
       buttons: true,
     })
         .then((willDelete) => {
           if (willDelete) {
-            StudySessions.collection.insert({
-              topic: topic,
-              className: className,
-              status: 'grasshopper',
-              sessionDate: sessionDate,
-              sessionTime: sessionTime,
-              owner: owner,
-            });
+            RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             Alerts.collection.remove(documentId);
           }
         });
@@ -49,6 +45,14 @@ class ListStudySessions extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
+    // pulls _id from all registered study sessions belonging to the user
+    const owner = Meteor.user().username;
+    const filteredSessions = _.filter(RegisteredSessions.collection.find({}).fetch(), function (data) { return data.owner === owner; });
+    const sessionId = _.pluck(filteredSessions, 'session');
+
+    // finds all study sessions that matches sessionId
+    const regStudySessions = sessionId.map(e => StudySessions.collection.find({ _id: e }).fetch());
+
     return (
         <div>
           <Container id="session-list">
@@ -60,8 +64,8 @@ class ListStudySessions extends React.Component {
             </Card.Content>
 
             <Card.Group>
-              {this.props.studySessions.map((studySession, index) => <StudySession key={index}
-                                                                                   studySession={studySession}/>)}
+              {regStudySessions.map((data, index) => <StudySession key={index}
+                                                                   studySession={data}/>)}
             </Card.Group>
           </Container>
         </div>
@@ -72,6 +76,7 @@ class ListStudySessions extends React.Component {
 /** Require an array of Stuff documents in the props. */
 ListStudySessions.propTypes = {
   studySessions: PropTypes.array.isRequired,
+  registeredSessions: PropTypes.array.isRequired,
   alert: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -80,10 +85,12 @@ ListStudySessions.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const sub1 = Meteor.subscribe(StudySessions.userPublicationName);
-  const sub2 = Meteor.subscribe(Alerts.userPublicationName);
+  const sub2 = Meteor.subscribe(RegisteredSessions.userPublicationName);
+  const sub3 = Meteor.subscribe(Alerts.userPublicationName);
   return {
     studySessions: StudySessions.collection.find({}).fetch(),
+    registeredSessions: RegisteredSessions.collection.find({}).fetch(),
     alert: Alerts.collection.find({}).fetch(),
-    ready: sub1.ready() && sub2.ready(),
+    ready: sub1.ready() && sub2.ready() && sub3.ready(),
   };
 })(ListStudySessions);
