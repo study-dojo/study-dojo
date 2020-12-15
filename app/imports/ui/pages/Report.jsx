@@ -33,8 +33,9 @@ class Report extends React.Component {
   /** On submit, insert the data. */
   submit(data, formRef) {
     const { user, reportReason, reportDescription } = data;
-    const submitBy = Meteor.user().username;
-    ReportedProfiles.collection.insert({ user, reportReason, reportDescription, submitBy },
+    const reportBy = Meteor.user().username;
+    console.log(`${user}, ${reportReason}, ${reportDescription}`);
+    ReportedProfiles.collection.insert({ user, reportReason, reportDescription, reportBy },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
