@@ -22,8 +22,8 @@ class MyProfile extends React.Component {
 
   /** On submit, insert the data. */
   submit(data) {
-    const { _id, firstName, lastName, pic, bio } = data;
-    Profiles.collection.update(_id, { $set: { firstName, lastName, pic, bio } }, (error) => {
+    const { _id, firstName, lastName, bio, picture } = data;
+    Profiles.collection.update(_id, { $set: { firstName, lastName, bio, picture } }, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
@@ -49,7 +49,7 @@ class MyProfile extends React.Component {
             <Grid.Row>
               <Grid.Column width={4}>
                 <Card>
-                  <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" wrapped ui={false}/>
+                  <Image src={profile.picture} wrapped ui={false} />
                   <Card.Content>
                     <Card.Header>{profile.firstName} {profile.lastName}</Card.Header>
                     <Card.Meta>
