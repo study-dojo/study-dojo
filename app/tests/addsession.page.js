@@ -12,22 +12,19 @@ class AddSessionPage {
   }
 
   async addNewSession(testController) {
-    await testController.typeText("#topic-field", "HTML");
-    await testController.typeText("#className-field", "ICS 314");
-    await testController.click("#status-dropdown");
-    await testController.click(Selector("option").withText("Sensei"));
-    await testController.typeText("#sessionDate-field", "12/10/2020");
-    await testController.typeText("#sessionTime-field", "8:00 am");
+    await testController.typeText('#title-field', 'HTML');
+    await testController.typeText('#className-dropdown', 'ICS 314');
+    await testController.click(Selector('#date-field'));
   }
 
   /** Asserts that this page is currently displayed. */
   async successfulSubmitIsDisplayed(testController) {
-    await testController.click("#add-submit");
-    await testController.expect(".swal-title").ok();
+    await testController.click('#add-submit');
+    await testController.expect('.swal-title').ok();
   }
 
   async clickSuccessOKButton(testController) {
-    await testController.click("button");
+    await testController.click('button');
   }
 }
 
