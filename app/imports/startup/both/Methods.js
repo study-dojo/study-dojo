@@ -5,7 +5,7 @@ const updateProfileMethod = 'Profiles.update';
 
 Meteor.methods({
   'Profiles.update'({ email, firstName, lastName, bio, picture }) {
-    Profiles.collection.update({ email }, { $set: { email, firstName, lastName, bio, picture } });
+    Profiles.collection.update({ email }, { $set: { email, firstName, lastName, bio, picture, points } });
   },
 });
 

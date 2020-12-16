@@ -8,7 +8,7 @@ class RankItem extends React.Component {
   render() {
     return (
         <Table.Row>
-          <Table.Cell>{this.props.stuff.profile}</Table.Cell>
+          <Table.Cell>{this.props.stuff.email}</Table.Cell>
           <Table.Cell>{this.props.stuff.points}</Table.Cell>
         </Table.Row>
     );

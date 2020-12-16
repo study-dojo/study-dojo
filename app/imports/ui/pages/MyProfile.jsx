@@ -27,7 +27,7 @@ class MyProfile extends React.Component {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
-        swal('Success', 'Profile updated successfully', 'success');
+        swal('Success', 'Profile updated successfully. Refresh to view changes.', 'success');
       }
     });
   }

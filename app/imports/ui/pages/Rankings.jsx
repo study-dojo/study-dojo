@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Points } from '../../api/points/Points';
 import RankItem from '../components/RankItem';
+import { Profiles } from '../../api/profiles/Profiles';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Rankings extends React.Component {
@@ -27,7 +27,7 @@ class Rankings extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.points.map((stuff) => <RankItem key={stuff._id} stuff={stuff}/>)}
+              {this.props.profiles.map((stuff) => <RankItem key={stuff._id} stuff={stuff}/>)}
             </Table.Body>
           </Table>
         </Container>
@@ -37,16 +37,16 @@ class Rankings extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 Rankings.propTypes = {
-  points: PropTypes.array.isRequired,
+  profiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Points.userPublicationName);
+  const subscription = Meteor.subscribe(Profiles.userPublicationName);
   return {
-    points: Points.collection.find({}).fetch(),
+    profiles: Profiles.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Rankings);

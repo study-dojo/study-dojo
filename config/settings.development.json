@@ -6,9 +6,9 @@
   ],
 
   "defaultProfiles": [
-    { "email": "admin@foo.com", "firstName": "admin", "lastName": "admin", "bio": "admin account bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
-    { "email": "john@foo.com", "firstName": "John", "lastName": "doe", "bio": "Default Bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" },
-    { "email": "bob@foo.com", "firstName": "Bob", "lastName": "Smith", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" }
+    { "email": "admin@foo.com", "firstName": "admin", "lastName": "admin", "bio": "admin account bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points": 1 },
+    { "email": "john@foo.com", "firstName": "John", "lastName": "doe", "bio": "Default Bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points": 1  },
+    { "email": "bob@foo.com", "firstName": "Bob", "lastName": "Smith", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points": 1  }
   ],
 
   "defaultRanks": [
