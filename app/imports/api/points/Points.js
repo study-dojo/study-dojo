@@ -3,10 +3,10 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /** Encapsulates state and variable values for this collection. */
-class LeaderboardCollection {
+class PointsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'LeaderboardCollection';
+    this.name = 'PointsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
@@ -22,4 +22,4 @@ class LeaderboardCollection {
   }
 }
 
-export const Points = new LeaderboardCollection();
+export const Points = new PointsCollection();

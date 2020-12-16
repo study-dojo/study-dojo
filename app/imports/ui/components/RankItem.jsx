@@ -8,8 +8,8 @@ class RankItem extends React.Component {
   render() {
     return (
         <Table.Row>
-          <Table.Cell>{this.props.leaderboard.profile}</Table.Cell>
-          <Table.Cell>{this.props.leaderboard.points}</Table.Cell>
+          <Table.Cell>{this.props.stuff.profile}</Table.Cell>
+          <Table.Cell>{this.props.stuff.points}</Table.Cell>
         </Table.Row>
     );
   }
@@ -17,7 +17,7 @@ class RankItem extends React.Component {
 
 /** Require a document to be passed to this component. */
 RankItem.propTypes = {
-  leaderboard: PropTypes.object.isRequired,
+  stuff: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

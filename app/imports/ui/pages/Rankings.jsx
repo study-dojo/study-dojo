@@ -4,6 +4,7 @@ import { Container, Table, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Points } from '../../api/points/Points';
+import RankItem from '../components/RankItem';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class Rankings extends React.Component {
@@ -16,9 +17,9 @@ class Rankings extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <Container>
+        <Container id="my-dojo-page">
           <Header as="h2" textAlign="center" inverted>Rankings</Header>
-          <Table celled>
+          <Table celled striped>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Profile</Table.HeaderCell>
@@ -26,7 +27,7 @@ class Rankings extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.leaderboard.map((leaderboard) => <Points key={leaderboard._id} leaderboard={leaderboard} />)}
+              {this.props.points.map((stuff) => <RankItem key={stuff._id} stuff={stuff}/>)}
             </Table.Body>
           </Table>
         </Container>
@@ -36,16 +37,16 @@ class Rankings extends React.Component {
 
 /** Require an array of Stuff documents in the props. */
 Rankings.propTypes = {
-  leaderboard: PropTypes.array.isRequired,
+  points: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Points.adminPublicationName);
+  const subscription = Meteor.subscribe(Points.userPublicationName);
   return {
-    leaderboard: Points.collection.find({}).fetch(),
+    points: Points.collection.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Rankings);

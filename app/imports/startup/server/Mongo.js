@@ -30,7 +30,7 @@ function addProfile({ email, firstName, lastName, bio, picture }) {
 }
 
 function addRanking(data) {
-  console.log(`Adding to rankings: ${data.profile} (${data.points})`);
+  console.log(`Adding to rankings: ${data.user} (${data.points})`);
   Points.collection.insert(data);
 }
 
@@ -64,11 +64,11 @@ if (StudySessions.collection.find().count() === 0) {
   }
 }
 
-/** Initialize the leaderboard if empty. */
+/** Initialize the Rankings/points if empty. */
 if (Points.collection.find().count() === 0) {
-  if (Meteor.settings.defaultRankings) {
+  if (Meteor.settings.defaultRanks) {
     console.log('Creating default rankings.');
-    Meteor.settings.defaultRankings.map(data => addRanking(data));
+    Meteor.settings.defaultRanks.map(data => addRanking(data));
   }
 }
 
