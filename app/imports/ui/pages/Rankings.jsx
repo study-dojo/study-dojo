@@ -46,7 +46,8 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Profiles.userPublicationName);
   return {
-    profiles: Profiles.collection.find({}).fetch(),
+    /** get collection and sort by points */
+    profiles: Profiles.collection.find({}, { sort: { points: -1 } }).fetch(),
     ready: subscription.ready(),
   };
 })(Rankings);
