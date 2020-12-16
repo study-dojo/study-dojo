@@ -44,16 +44,7 @@ class AddStudySession extends React.Component {
     let { date } = data;
     date = date.toISOString();
     const owner = Meteor.user().username;
-
-    const profile = Profiles.collection.findOne({ owner });
-    Profiles.collection.update(profile._id, { $inc: { points: 1 } }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Points updated successfully', 'success');
-      }
-    });
-
+    const profile = Profiles.collection.findOne({ email: owner });
     const sessionId = StudySessions.collection.insert({ title, className, date, owner },
         (error) => {
           if (error) {
@@ -61,6 +52,8 @@ class AddStudySession extends React.Component {
           } else {
             swal('Success', 'Item added successfully', 'success');
             formRef.reset();
+            // Increment Points for user by 1 on submit. if points is undef points becomes 1
+            Profiles.collection.update(profile._id, { $inc: { points: 1 } });
             // Register study session for owner
             RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             // find all other users that are registered under the same class
