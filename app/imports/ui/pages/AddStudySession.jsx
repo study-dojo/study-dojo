@@ -81,7 +81,7 @@ class AddStudySession extends React.Component {
             }} schema={bridge} onSubmit={data => this.submit(data, fRef)}>
               <Segment className='AddForm'>
                 <TextField id="title-field" name='title'/>
-                <SelectField id="className-dropdown" name='className'/>
+                <SelectField id="classNameList" name='className'/>
                 <DateField id="date-field" name='date'/>
                 <SubmitField id="add-submit" value='Submit'/>
                 <ErrorsField/>
