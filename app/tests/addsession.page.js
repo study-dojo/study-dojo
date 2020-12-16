@@ -14,7 +14,7 @@ class AddSessionPage {
   async addNewSession(testController) {
     await testController.typeText('#title-field', 'HTML');
     await testController.typeText('#className-dropdown', 'ICS 314');
-    await testController.click(Selector('#date-field'));
+    await testController.typeText('#date-field', '2020-12-20T12:30', [0.1]);
   }
 
   /** Asserts that this page is currently displayed. */
