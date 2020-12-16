@@ -12,6 +12,7 @@ import { StudySessions } from '../../api/studySession/StudySessions';
 import { RegisteredSessions } from '../../api/studySession/RegisteredSessions';
 import { DojoOwners } from '../../api/dojo/DojoOwner';
 import { Alerts } from '../../api/alert/Alerts';
+import { Profiles } from '../../api/profiles/Profiles';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
@@ -43,6 +44,16 @@ class AddStudySession extends React.Component {
     let { date } = data;
     date = date.toISOString();
     const owner = Meteor.user().username;
+
+    const profile = Profiles.collection.findOne({ owner });
+    Profiles.collection.update(profile._id, { $inc: { points: 1 } }, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Points updated successfully', 'success');
+      }
+    });
+
     const sessionId = StudySessions.collection.insert({ title, className, date, owner },
         (error) => {
           if (error) {
@@ -98,8 +109,9 @@ AddStudySession.propTypes = {
 };
 
 export default withTracker(() => {
-  const sub = Meteor.subscribe(DojoOwners.userPublicationName);
+  const sub1 = Meteor.subscribe(DojoOwners.userPublicationName);
+  const sub2 = Meteor.subscribe(Profiles.userPublicationName);
   return {
-    ready: sub.ready(),
+    ready: sub1.ready() && sub2.ready(),
   };
 })(AddStudySession);
