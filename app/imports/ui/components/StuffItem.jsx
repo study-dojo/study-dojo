@@ -24,5 +24,5 @@ StuffItem.propTypes = {
   stuff: PropTypes.object.isRequired,
 };
 
-/** Wrap this component in withRouter since we use the <Link> React Router element. */
+/** Wrap this component in withRouter since we use the <Link> Reacdt Router element. */
 export default withRouter(StuffItem);

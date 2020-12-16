@@ -11,6 +11,12 @@
     { "email": "bob@foo.com", "firstName": "Bob", "lastName": "Smith", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png" }
   ],
 
+  "defaultRanks": [
+    { "profile": "admin@foo.com", "points": 123 },
+    { "profile": "john@foo.com", "points": 43 },
+    { "profile": "bob@foo.com", "points": 2 }
+  ],
+
   "defaultDojo": [
     { "className": "ICS 314", "status": "grasshopper", "owner": "john@foo.com" },
     { "className": "ICS 311", "status": "grasshopper", "owner": "john@foo.com" },
