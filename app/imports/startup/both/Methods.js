@@ -4,7 +4,7 @@ import { Profiles } from '../../api/profiles/Profiles';
 const updateProfileMethod = 'Profiles.update';
 
 Meteor.methods({
-  'Profiles.update'({ email, firstName, lastName, bio, picture }) {
+  'Profiles.update'({ email, firstName, lastName, bio, picture, points }) {
     Profiles.collection.update({ email }, { $set: { email, firstName, lastName, bio, picture, points } });
   },
 });
