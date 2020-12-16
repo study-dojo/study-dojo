@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress, Card, Container, Header, Loader, Image, Grid, Segment, Form, Divider } from 'semantic-ui-react';
+import { Card, Container, Header, Loader, Image, Grid, Segment, Form, Divider } from 'semantic-ui-react';
 import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -51,27 +51,19 @@ class MyProfile extends React.Component {
                 <Card>
                   <Image src={profile.picture} wrapped ui={false} />
                   <Card.Content>
-                    <Card.Header>{profile.firstName} {profile.lastName}</Card.Header>
+                    <Card.Header>Name: {profile.firstName} {profile.lastName}</Card.Header>
                     <Card.Meta>
-                      <span>{email}</span>
+                      <span>Email: {email}</span>
                     </Card.Meta>
                     <Card.Description>
-                      {profile.bio}
+                      Bio: {profile.bio}
                     </Card.Description>
+                    <Divider hidden/>
+                    <Card.Header>My Study Points: {profile.points}</Card.Header>
                   </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column width={12}>
-                <Grid.Row>
-                  <Card fluid>
-                    <Card.Content>
-                      <Card.Header>Rank Progress</Card.Header>
-                      <Divider hidden/>
-                      <Progress value='3' total='5' progress='ratio'/>
-                    </Card.Content>
-                  </Card>
-                  <Divider hidden/>
-                </Grid.Row>
                 <Grid.Row>
                   <AutoForm model={profile} schema={bridge} onSubmit={data => this.submit(data)}>
                     <Segment className='AddForm'>
