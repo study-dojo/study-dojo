@@ -1,8 +1,65 @@
+
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" },
-    { "email": "bob@foo.com", "password": "changeme" }
+    { "email": "bob@foo.com", "password": "changeme" },
+    { "email": "aihayasaka@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "leonie@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "humairaa@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "eloise#foo.com", "password": "changeme", "role": "admin" },
+    { "email": "shannen@foo.com", "password": "changeme" },
+    { "email": "dollie@foo.com", "password": "changeme" },
+    { "email": "riyad@foo.com", "password": "changeme" },
+    { "email": "breanna@foo.com", "password": "changeme" },
+    { "email": "jazmin@foo.com", "password": "changeme" },
+    { "email": "brian@foo.com", "password": "changeme" },
+    { "email": "finnian@foo.com", "password": "changeme" },
+    { "email": "sidney@foo.com", "password": "changeme" },
+    { "email": "noel@foo.com", "password": "changeme" },
+    { "email": "ciaran@foo.com", "password": "changeme" },
+    { "email": "gabrielle@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "alexandru@foo.com", "password": "changeme" },
+    { "email": "jett@foo.com", "password": "changeme" },
+    { "email": "jovan@foo.com", "password": "changeme" },
+    { "email": "lauryno@foo.com", "password": "changeme" },
+    { "email": "chelsey@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "lesley@foo.com", "password": "changeme" },
+    { "email": "kaylee@foo.com", "password": "changeme" },
+    { "email": "claral@foo.com", "password": "changeme" },
+    { "email": "ruiw@foo.com", "password": "changeme" },
+    { "email": "tamerap@foo.com", "password": "changeme" },
+    { "email": "gruffyddj@foo.com", "password": "changeme" },
+    { "email": "berthad@foo.com", "password": "changeme" },
+    { "email": "pollyannam@foo.com", "password": "changeme" },
+    { "email": "orianaap@foo.com", "password": "changeme" },
+    { "email": "alisonb@foo.com", "password": "changeme" },
+    { "email": "saimac@foo.com", "password": "changeme" },
+    { "email": "madelync@foo.com", "password": "changeme" },
+    { "email": "huwl@foo.com", "password": "changeme" },
+    { "email": "mischas@foo.com", "password": "changeme" },
+    { "email": "tjayw@foo.com", "password": "changeme" },
+    { "email": "marionf@foo.com", "password": "changeme" },
+    { "email": "raulm@foo.com", "password": "changeme" },
+    { "email": "halimaj@foo.com", "password": "changeme" },
+    { "email": "boydw@foo.com", "password": "changeme" },
+    { "email": "maliham@foo.com", "password": "changeme" },
+    { "email": "gemmag@foo.com", "password": "changeme" },
+    { "email": "jaxsont@foo.com", "password": "changeme" },
+    { "email": "dianed@foo.com", "password": "changeme" },
+    { "email": "johnb@foo.com", "password": "changeme" },
+    { "email": "macsend@foo.com", "password": "changeme", "role": "admin" },
+    { "email": "sanahw@foo.com", "password": "changeme" },
+    { "email": "iramc@foo.com", "password": "changeme" },
+    { "email": "nabihac@foo.com", "password": "changeme" },
+    { "email": "chantelb@foo.com", "password": "changeme"},
+    { "email": "edied@foo.com", "password": "changeme" }
+  ],
+
+  "defaultProfiles": [
+    { "email": "admin@foo.com", "firstName": "admin", "lastName": "admin", "bio": "admin account bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points": 22 },
+    { "email": "john@foo.com", "firstName": "John", "lastName": "Doe", "bio": "Default Bio", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points:": 0 },
+    { "email": "bob@foo.com", "firstName": "Bob", "lastName": "Smith", "bio": "changeme", "picture": "https://react.semantic-ui.com/images/avatar/large/matthew.png", "points": 3  }
   ],
 
   "defaultDojo": [
@@ -12,13 +69,27 @@
   ],
 
   "defaultStudySessions": [
-    { "topic": "Help with HW", "className": "ICS 311", "sessionDate": "11/15/2020", "sessionTime": "Right Now!", "owner": "john@foo.com" },
+    { "title": "HW Help", "className": "ICS 311", "date": "2020-12-15T12:30:00.000Z",  "owner": "john@foo.com" },
 
-    { "topic":  "Exam Study", "className":  "ICS 311", "sessionDate": "11/17/2020", "sessionTime": "5:00 pm", "owner":  "john@foo.com"}
+    { "title":  "Exam Study", "className":  "ICS 311", "date": "2020-12-19T05:00:00.000Z", "owner":  "john@foo.com"}
   ],
 
-  "monti": {
-    "appId": "changeme",
-    "appSecret": "changeme"
-  }
+  "defaultReports": [
+    {
+      "user": "bob@foo.com",
+      "reportReason": "Cheating",
+      "reportDescription": "Farming Points",
+      "reportBy": "john@foo.com"
+    },
+
+    {
+      "user": "bob@foo.com",
+      "reportReason": "Cheating",
+      "reportDescription": "Farming Points",
+      "reportBy": "ron@foo.com"
+    }
+  ],
+
+  "loadAssetsFile": true
+
 }

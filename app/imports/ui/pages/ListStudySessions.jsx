@@ -75,12 +75,24 @@ class ListStudySessions extends React.Component {
     swal({
       title: 'Do you want to attend a study session?',
       text: `${title} for ${className} on ${month}/${day}/${year} at ${time}`,
-      buttons: true,
+      buttons: {
+        cancel: 'cancel',
+        No: {
+          text: 'No',
+          attend: 'False',
+        },
+        Yes: {
+          text: 'Yes',
+          attend: 'True',
+        },
+      },
     })
-        .then((willDelete) => {
-          if (willDelete) {
+        .then((attend) => {
+          if (attend) {
             RegisteredSessions.collection.insert({ session: sessionId, owner: owner });
             Alerts.collection.remove(documentId);
+          } else {
+            Alerts.constructor.remove(documentId);
           }
         });
   }
