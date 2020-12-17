@@ -115,7 +115,24 @@
     { "className": "ICS 314", "status": "grasshopper", "owner": "tamerap@foo.com" },
     { "className": "ICS 314", "status": "grasshopper", "owner": "alisonb@foo.com" },
     { "className": "ICS 314", "status": "grasshopper", "owner": "marionf@foo.com" },
-    { "className": "ICS 311", "status": "grasshopper", "owner": "huwl@foo.com" },    { "className": "ICS 311", "status": "sensei", "owner": "marionf@foo.com" }
+    { "className": "ICS 311", "status": "grasshopper", "owner": "huwl@foo.com" },     { "className": "ICS 311", "status": "sensei", "owner": "marionf@foo.com" },
+    { "className": "ICS 241", "status": "grasshopper", "owner": "raulm@foo.com" },
+    { "className": "ICS 241", "status": "sensei", "owner": "jett@foo.com" },
+    { "className": "ICS 241", "status": "sensei", "owner": "lauryno@foo.com" },
+    { "className": "ICS 241", "status": "sensei", "owner": "chelsey@foo.com" },
+    { "className": "ICS 241", "status": "sensei", "owner": "john@foo.com" },
+    { "className": "ICS 141", "status": "grasshopper", "owner": "maliham@foo.com" },
+    { "className": "ICS 141", "status": "sensei", "owner": "jett@foo.com" },
+    { "className": "ICS 141", "status": "sensei", "owner": "lauryno@foo.com" },
+    { "className": "ICS 141", "status": "sensei", "owner": "chelsey@foo.com" },
+    { "className": "ICS 141", "status": "sensei", "owner": "john@foo.com" },
+    { "className": "ICS 141", "status": "sensei", "owner": "bob@foo.com" },
+    { "className": "ICS 101", "status": "sensei", "owner": "bob@foo.com" },
+    { "className": "ICS 101", "status": "grasshopper", "owner": "edied@foo.com" },
+    { "className": "ICS 101", "status": "sensei", "owner": "jett@foo.com" },
+    { "className": "ICS 101", "status": "sensei", "owner": "lauryno@foo.com" },
+    { "className": "ICS 101", "status": "sensei", "owner": "chelsey@foo.com" },
+    { "className": "ICS 101", "status": "sensei", "owner": "john@foo.com" }
   ],
 
   "studySessions": [
@@ -124,6 +141,9 @@
     { "title": "HW Help", "className": "ICS 314", "date": "2020-12-23T10:00:00.000Z",  "owner": "kaylee@foo.com" },
     { "title": "HW Help", "className": "ICS 314", "date": "2020-12-18T12:30:00.000Z",  "owner": "chelsey@foo.com" },
     { "title": "HW Help", "className": "ICS 314", "date": "2020-11-15T12:30:00.000Z",  "owner": "chelsey@foo.com" },
-    { "title": "Exam Study", "className": "ICS 311", "date": "2020-12-15T12:30:00.000Z",  "owner": "huwl@foo.com" }
+    { "title": "Exam Study", "className": "ICS 311", "date": "2020-12-15T12:30:00.000Z",  "owner": "huwl@foo.com" },
+    { "title": "Exam Study", "className": "ICS 241", "date": "2020-12-17T11:30:00.000Z",  "owner": "raulm@foo.com" },
+    { "title": "Exam Study", "className": "ICS 141", "date": "2020-12-15T12:30:00.000Z",  "owner": "maliham@foo.com" },
+    { "title": "Exam Study", "className": "ICS 101", "date": "2020-12-15T12:30:00.000Z",  "owner": "edied@foo.com" }
   ]
 }
