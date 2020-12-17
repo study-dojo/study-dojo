@@ -83,6 +83,7 @@ if (Dojos.collection.find().count() === 0) {
 if ((Meteor.settings.loadAssetsFile) && (Meteor.users.find().count() < 54)) {
   const assetsFileName = 'data.json';
   console.log(`Loading data from private/${assetsFileName}`);
+  console.log(Meteor.users.find().count());
   const jsonData = JSON.parse(Assets.getText(assetsFileName));
   jsonData.profiles.map(profile => addProfile(profile));
   jsonData.dojo.map(data => addDojo(data));
