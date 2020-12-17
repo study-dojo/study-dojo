@@ -28,7 +28,7 @@ class Signup extends React.Component {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: '', redirectToReferer: true });
-        Profiles.collection.insert({ email });
+        Profiles.collection.insert({ email, points: 0 });
       }
     });
   }
