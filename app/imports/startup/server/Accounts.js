@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
-// import { updateProfileMethod } from '../both/Methods';
 
 /* eslint-disable no-console */
 
@@ -26,4 +25,11 @@ if (Meteor.users.find().count() === 0) {
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }
+}
+
+if ((Meteor.settings.loadAssetsFile) && (Meteor.users.find().count() < 3)) {
+  const assetsFileName = 'data.json';
+  console.log(`Loading data from private/${assetsFileName}`);
+  const jsonData = JSON.parse(Assets.getText(assetsFileName));
+  jsonData.accounts.map(user => createUser(user));
 }
